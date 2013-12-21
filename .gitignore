@@ -1,0 +1,3 @@
+*.lua
+!maps/*.lua
+lovekit
