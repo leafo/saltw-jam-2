@@ -10,6 +10,12 @@ class Hud
   add: (...) =>
     @entities\add ...
 
+  add_message_box: (box) =>
+    @msg_box\hide! if @msg_box
+
+    @msg_box = box
+    @entities\add box
+
   update: (dt) =>
     @entities\update dt, @world
 
@@ -29,7 +35,7 @@ class MessageBox
 
   new: (@text) =>
     @alpha = 0
-    @label = RevealLabel @text, 0, 0, -> @hide!
+    @label = RevealLabel @text, 0, 0
     @seq = Sequence ->
       tween @, 0.3, { alpha: 255 }
       @seq = nil
@@ -59,13 +65,14 @@ class MessageBox
     g.pop!
     COLOR\pop!
 
-  hide: =>
+  hide: (fn) =>
     return if @hiding or not @visible
     @hiding = true
     @seq = Sequence ->
       tween @, 0.2, { alpha: 0 }
       @hiding = false
       @visible = false
+      fn! if fn
 
   update: (dt) =>
     @seq\update dt if @seq

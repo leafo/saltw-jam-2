@@ -8,8 +8,16 @@ import MessageBox, Hud from require "ui"
 class Npc extends Entity
   solid: true
 
-  on_interact: (player, world) =>
-    world.hud\add MessageBox "Wanker Piss"
+  on_interact: (world) =>
+    print "interacting"
+
+  on_nearby: (world) =>
+    @msg_box = MessageBox "Press 'X' to talk"
+    world.hud\add_message_box @msg_box
+
+  off_nearby: (world) =>
+    if @msg_box
+      @msg_box\hide -> @msg_box = nil
 
   draw: =>
     super {255,100,100}
@@ -26,6 +34,9 @@ class Player extends Entity
     dx, dy = unpack move * (dt * @speed)
     @fit_move dx, dy, world
     true
+
+  touch_radius: =>
+    @scale 1.5, 1.5, true
 
 class Game
   new: =>
@@ -47,6 +58,8 @@ class Game
     @entities\add @player
     @hud = Hud @
 
+    @nearby = {}
+
     @collide = UniformGrid!
 
   draw: =>
@@ -61,19 +74,36 @@ class Game
 
   update: (dt) =>
     @collide\clear!
+
     for e in *@entities
       if e.solid
         @collide\add e
+
+    for entity in *@collide\get_touching @player\touch_radius!
+      continue if entity == @player
+      unless @nearby[entity]
+        if entity.on_nearby
+          entity\on_nearby @
+
+      @nearby[entity] = 2
+
+    -- see who is nearby
+    for entity,v in pairs @nearby
+      @nearby[entity] -= 1
+      if @nearby[entity] == 0
+        @nearby[entity] = nil
+        if entity.off_nearby
+          entity\off_nearby @
 
     @entities\update dt, @
     @hud\update dt, @
 
   on_key: (key) =>
     if key == "x"
-      for entity in *@collide\get_touching @player\scale 1.5, 1.5, true
+      for entity in *@collide\get_touching @player\touch_radius!
         continue if entity == @player
         if entity.on_interact
-          entity\on_interact @player, @
+          entity\on_interact @
 
   collides: (entity) =>
     if entity == @player
