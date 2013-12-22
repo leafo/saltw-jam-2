@@ -19,5 +19,6 @@
  </layer>
  <objectgroup name="objects" width="40" height="40">
   <object name="spawn" x="220" y="299"/>
+  <object name="npc" x="389" y="305"/>
  </objectgroup>
 </map>

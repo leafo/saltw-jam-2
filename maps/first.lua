@@ -151,6 +151,17 @@ return {
           height = 0,
           visible = true,
           properties = {}
+        },
+        {
+          name = "npc",
+          type = "",
+          shape = "rectangle",
+          x = 389,
+          y = 305,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
         }
       }
     }
