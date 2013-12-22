@@ -4,15 +4,16 @@ require "lovekit.all"
 {graphics: g, :keyboard} = love
 
 import MessageBox, Hud from require "ui"
+import TalkScreen from require "screens"
 
 class Npc extends Entity
   solid: true
 
   on_interact: (world) =>
-    print "interacting"
+    dispatch\push TalkScreen!
 
   on_nearby: (world) =>
-    @msg_box = MessageBox "Press 'X' to talk"
+    @msg_box = MessageBox "Press 'X' to schmooze"
     world.hud\add_message_box @msg_box
 
   off_nearby: (world) =>
