@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16">
+  <image source="../images/tiles.png" width="256" height="256"/>
+ </tileset>
+ <layer name="ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1jkKACAMAMHo/x9trYWgRVAyA+mXgEcEANTULia7rx+MPn369n2Z5/q0L3uv+vTpq9P3+v33w/uhb+57+f8MAKsBNacCEw==
+  </data>
+ </layer>
+ <layer name="collide" width="40" height="40">
+  <properties>
+   <property name="hidden" value="true"/>
+   <property name="solid" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1rEKgDAQRMGA///P9ilz3rHBGbCT5TUxrgUA//QcPNN9ne9X6avRV3PSN3muv9rVl7HTtasvY6drN6Uv/ft3w/0x6Ya+5P9nANi9VSYA2Q==
+  </data>
+ </layer>
+ <objectgroup name="objects" width="40" height="40">
+  <object name="spawn" x="220" y="299"/>
+ </objectgroup>
+</map>
