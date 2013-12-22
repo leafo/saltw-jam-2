@@ -1,7 +1,52 @@
 
 {graphics: g, :timer, :keyboard} = love
 
-import RevealLabel from require "lovekit.ui"
+import RevealLabel, VList, Label from require "lovekit.ui"
+
+class ChoiceBox extends VList
+  waiting: true
+  current_choice: 1
+
+  new: (choices, finished_fn) =>
+    super 0, 0, [Label c for c in *choices]
+    @seq = Sequence ->
+      while true
+        switch wait_for_key!
+          when "up"
+            @move -1
+          when "down"
+            @move 1
+          when "x"
+            break
+
+      @waiting = false
+      finished_fn choices[@current_choice]
+
+  move: (dir) =>
+    before = @current_choice
+    @current_choice = math.max 1, math.min #@items, @current_choice + dir
+
+    if @current_choice == before
+      print "play Brrrt"
+
+  update: (dt, world) =>
+    super dt
+    @seq\update dt if @seq
+
+    @x = world.viewport\right @w + 10
+    @y = world.viewport\bottom @h + 40
+
+    @waiting
+
+  draw: =>
+    Box.draw @, {255, 255, 255, 100}
+    current =  @items[@current_choice]
+    COLOR\push 255, 100, 100
+    g.rectangle "fill", current.x - 12, current.y + (current.h / 2) - 3, 6, 6
+    COLOR\pop!
+
+    super!
+
 
 class DialogBox extends Box
   waiting: true
@@ -22,7 +67,7 @@ class DialogBox extends Box
 
   update: (dt, world) =>
     @seq\update dt
-    @label\update dt if @label
+    @label\update dt
 
     @x = world.viewport\left 10
     @y = world.viewport\bottom(10) - @label.h
@@ -53,10 +98,17 @@ class DialogBox extends Box
 
 
 class Dialog extends Sequence
+  scope = @default_scope
+
   @extend {
     dialog: (container, msg) ->
-      Sequence.default_scope.await (fn) ->
+      scope.await (fn) ->
         container.entities\add DialogBox msg, fn
+
+    choice: (container, choices) ->
+      scope.await (fn) ->
+        container.entities\add ChoiceBox choices, fn
+
   }
 
 class Head
@@ -79,8 +131,18 @@ class TalkScreen
     @seqs = DrawList!
 
     @seqs\add Dialog ->
-      dialog @, "Here is the first dialog message"
-      dialog @, "Here is the next dialog message"
+      dialog @, "Pick on of these choices"
+      res = choice @, {
+        "Yes"
+        "No"
+      }
+
+      if res == "Yes"
+        dialog @, "You picked yes"
+      else
+        dialog @, "Sod off mate"
+
+      dispatch\pop!
 
   update: (dt) =>
     @seqs\update dt

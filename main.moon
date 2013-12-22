@@ -126,5 +126,6 @@ love.load = ->
   g.setBackgroundColor 30,30,40
 
   export dispatch = Dispatcher Game!
+  dispatch.default_transition = FadeTransition
   dispatch\bind love
 
