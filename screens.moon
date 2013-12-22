@@ -6,19 +6,23 @@ import RevealLabel from require "lovekit.ui"
 class DialogBox extends Box
   waiting: true
   show_next: false
+  alpha: 0
 
   new: (msg, finished_fn) =>
     @seq = Sequence ->
       await (fn) ->
         @label = RevealLabel msg, 0, 0, fn
+        tween @, 0.2, alpha: 255
+
       @show_next = timer.getTime!
       wait_for_key "x"
+      tween @, 0.2, alpha: 0
       @waiting = false
       finished_fn!
 
   update: (dt, world) =>
     @seq\update dt
-    @label\update dt
+    @label\update dt if @label
 
     @x = world.viewport\left 10
     @y = world.viewport\bottom(10) - @label.h
@@ -32,13 +36,21 @@ class DialogBox extends Box
     @waiting
 
   draw: =>
+    unless @alpha == 255
+      COLOR\pusha @alpha
+
     super {255, 255, 255, 100}
+
     if @show_next and duty_on nil, nil, @show_next
       COLOR\push 255, 100, 100
       g.rectangle "fill", @x + @w - 4, @y + @h - 4, 8, 8
       COLOR\pop!
 
-    @label\draw!
+    @label\draw! if @label
+
+    unless @alpha == 255
+      COLOR\pop!
+
 
 class Dialog extends Sequence
   @extend {
