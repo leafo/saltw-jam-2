@@ -3,11 +3,13 @@ require "lovekit.all"
 
 {graphics: g, :keyboard} = love
 
+import MessageBox, Hud from require "ui"
+
 class Npc extends Entity
   solid: true
 
   on_interact: (player, world) =>
-    print "interact with me"
+    world.hud\add MessageBox "Wanker Piss"
 
   draw: =>
     super {255,100,100}
@@ -43,6 +45,7 @@ class Game
     @viewport = Viewport scale: 2
     @player = Player sx, sy
     @entities\add @player
+    @hud = Hud @
 
     @collide = UniformGrid!
 
@@ -51,17 +54,10 @@ class Game
     @viewport\apply!
     @map\draw @viewport
 
-    g.print "hello world", 10, 10
-
     @entities\draw!
-    @viewport\pop!
+    @hud\draw!
 
-  on_key: (key) =>
-    if key == "x"
-      for entity in *@collide\get_touching @player\scale 1.5, 1.5, true
-        continue if entity == @player
-        if entity.on_interact
-          entity\on_interact @player, @
+    @viewport\pop!
 
   update: (dt) =>
     @collide\clear!
@@ -70,6 +66,14 @@ class Game
         @collide\add e
 
     @entities\update dt, @
+    @hud\update dt, @
+
+  on_key: (key) =>
+    if key == "x"
+      for entity in *@collide\get_touching @player\scale 1.5, 1.5, true
+        continue if entity == @player
+        if entity.on_interact
+          entity\on_interact @player, @
 
   collides: (entity) =>
     if entity == @player
@@ -84,7 +88,7 @@ load_font = (img, chars)->
 
 love.load = ->
   export fonts = {
-    default: load_font "images/font1.png", [[ ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~!"#$%&'()*+,-./0123456789:;<=>?]]
+    default: load_font "images/font1.png",[[ ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~!"#$%&'()*+,-./0123456789:;<=>?]]
   }
 
   g.setFont fonts.default
