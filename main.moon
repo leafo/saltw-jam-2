@@ -37,17 +37,10 @@ class Door extends Box
 
 class Npc extends Entity
   solid: true
+  has_message_box @, "Press 'X' to schmooze"
 
   on_interact: (world) =>
     dispatch\push TalkScreen!
-
-  on_nearby: (world) =>
-    @msg_box = MessageBox "Press 'X' to schmooze"
-    world.hud\add_message_box @msg_box
-
-  off_nearby: (world) =>
-    if @msg_box
-      @msg_box\hide -> @msg_box = nil
 
   draw: =>
     super {255,100,100}
