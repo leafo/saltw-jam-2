@@ -73,6 +73,7 @@ class DialogBox extends Box
     @y = world.viewport\bottom(10) - @label.h
 
     @w = world.viewport.w - 20
+    @label\set_max_width(@w)
     @h = @label.h
 
     @label.x = @x
@@ -131,7 +132,7 @@ class TalkScreen
     @seqs = DrawList!
 
     @seqs\add Dialog ->
-      dialog @, "Pick on of these choices"
+      dialog @, "Pick one of these choices and I'll fart yr face there Pal"
       res = choice @, {
         "Yes"
         "No"
