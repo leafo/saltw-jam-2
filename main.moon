@@ -54,7 +54,7 @@ class Game
             sy = o.y
     }
 
-    @viewport = Viewport scale: 2
+    @viewport = Viewport scale: game_config.scale
     @player = Player sx, sy
     @entities\add @player
     @hud = Hud @
