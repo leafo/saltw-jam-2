@@ -7,6 +7,34 @@ import MessageBox, Hud from require "ui"
 import TalkScreen from require "dialog"
 import InventoryScreen from require "inventory"
 
+has_message_box = (cls, msg) ->
+  cls.__base.on_nearby = (world) =>
+    @msg_box = MessageBox msg
+    world.hud\add_message_box @msg_box
+
+  cls.__base.off_nearby = (world) =>
+    if @msg_box
+      @msg_box\hide -> @msg_box = nil
+
+class Door extends Box
+  solid: true
+  w: 10
+  h: 20
+
+  has_message_box @, "Press 'X' to enter door"
+
+  new: (x, y, @to) =>
+    super 0, 0
+    @move_center x, y
+
+  on_interact: (world) =>
+    print "enter door to", @to
+
+  draw: =>
+    super {255, 100, 255, 64}
+
+  update: => true
+
 class Npc extends Entity
   solid: true
 
@@ -48,6 +76,8 @@ class Game
     @map = TileMap.from_tiled "maps.first", {
       object: (o) ->
         switch o.name
+          when "door"
+            @entities\add Door o.x, o.y, o.properties.to
           when "npc"
             @entities\add Npc o.x, o.y
           when "spawn"
