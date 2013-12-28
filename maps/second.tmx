@@ -16,7 +16,7 @@
   </data>
  </layer>
  <objectgroup name="objects" width="33" height="29">
-  <object name="door" x="372" y="154">
+  <object name="door" x="367" y="157">
    <properties>
     <property name="to" value="first"/>
    </properties>

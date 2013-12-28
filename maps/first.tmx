@@ -18,7 +18,7 @@
  <objectgroup name="objects" width="33" height="29">
   <object name="spawn" x="100" y="155"/>
   <object name="npc" x="216" y="119"/>
-  <object name="door" x="69" y="120">
+  <object name="door" x="78" y="127">
    <properties>
     <property name="to" value="second"/>
    </properties>

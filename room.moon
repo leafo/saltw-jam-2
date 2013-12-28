@@ -16,9 +16,8 @@ has_message_box = (cls, msg) ->
       @msg_box\hide -> @msg_box = nil
 
 class Door extends Box
-  solid: true
   w: 10
-  h: 20
+  h: 10
 
   has_message_box @, "Press 'X' to enter door"
 
@@ -27,7 +26,10 @@ class Door extends Box
     @move_center x, y
 
   on_interact: (world) =>
-    print "enter door to", @to
+    room = world.game.rooms[@to]
+    room\place_player world.name
+
+    dispatch\replace room
 
   draw: =>
     super {255, 100, 255, 64}
@@ -61,15 +63,18 @@ class Player extends Entity
     @scale 1.5, 1.5, true
 
 class Room
-  new: (@game, map_name) =>
+  new: (@game, @name) =>
     @viewport = Viewport scale: game_config.scale
     @entities = DrawList!
+    @doors = {}
 
-    @map = TileMap.from_tiled "maps.first", {
+    @map = TileMap.from_tiled "maps.#{@name}", {
       object: (o) ->
         switch o.name
           when "door"
-            @entities\add Door o.x, o.y, o.properties.to
+            door = Door o.x, o.y, o.properties.to
+            @doors[door.to] = door
+            @entities\add door
           when "npc"
             @entities\add Npc o.x, o.y
           when "spawn"
@@ -112,7 +117,7 @@ class Room
     @collide\clear!
 
     for e in *@entities
-      if e.solid
+      if e.solid or e.on_nearby
         @collide\add e
 
     for entity in *@collide\get_touching @player\touch_radius!
@@ -134,13 +139,15 @@ class Room
     @entities\update dt, @
     @hud\update dt, @
 
-
-
   collides: (entity) =>
     if entity == @player
       for touching in *@collide\get_touching entity
-        return true
+        return true if touching.solid
 
     @map\collides entity
+
+  place_player: (source) =>
+    @player\move_center @doors[source]\center!
+
 
 { :Room }
