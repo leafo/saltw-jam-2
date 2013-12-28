@@ -1,7 +1,7 @@
 
 { graphics: g } = love
 
-import VList, Label from require "lovekit.ui"
+import VList, Label, RevealLabel from require "lovekit.ui"
 
 ez_approach = (val, target, dt) ->
   approach val, target, dt * 10 * math.max 1, math.abs val - target
@@ -10,7 +10,7 @@ class Card extends Box
   w: 60
   h: 75
 
-  new: (label) =>
+  new: (label="Card", @detailed_label="...") =>
     super 0, 0
     @label = Label label
 
@@ -33,14 +33,17 @@ class CardList extends VList
 
     if @current_choice == before
       print "play Brrrt"
+    else
+      @on_select @items[@current_choice]
 
   new: (x,y, cards={}) =>
-    super x, y, {
-      xalign: "right"
-      unpack cards
-    }
+    cards.xalign or= "right"
+    super x, y, cards
 
     @seq = Sequence ->
+      if item = @items[@current_choice]
+        @on_select item
+
       while true
         switch wait_for_key!
           when "up"
@@ -67,17 +70,43 @@ class CardList extends VList
     @seq\update dt
     super dt
 
+  on_select: (item) =>
+    -- override me
+
+
 class InventoryScreen
   new: (@game) =>
     @viewport = Viewport scale: game_config.scale
     @entities = DrawList!
 
-    @entities\add CardList @viewport\right(5), @viewport\top(5), {
-      Card "Piss\nCard"
-      Card "Thug\nCard"
-      Card "Lovers\nCard"
-      Card "Satan\nCard"
+    local *
+
+    left_col_width = @viewport.w - Card.w - 20
+
+    card_data = VList @viewport\left(5), @viewport\top(5), {
+      with Box(0,0,left_col_width, 100)
+        .draw = =>
+          COLOR\pusha 64
+          Box.draw @
+          g.print "Item picture goes here...", @x + 5, @y + 5
+          COLOR\pop!
     }
+
+    card_list = CardList @viewport\right(5), @viewport\top(5), {
+      Card "Piss\nCard", "This card is about 1 thing and that's freaking piss"
+      Card "Thug\nCard", "Once a thug forever a man of the streets, wiser by the night and more HUNGRY when mum forgets to feed you"
+      Card "Lovers\nCard", "Making love is a way of life I explain to my inflatable partner"
+      Card "Satan\nCard", "Let your demons out, show me your spunk"
+
+      on_select: (list, item) ->
+        label = RevealLabel item.detailed_label
+        label\set_max_width left_col_width
+        card_data.items[2] = label
+    }
+
+    @entities\add card_list
+    @entities\add card_data
+
 
   update: (dt) =>
     @entities\update dt, @viewport
