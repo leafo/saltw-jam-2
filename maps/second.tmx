@@ -4,7 +4,7 @@
   <image source="../images/tiles.png" width="256" height="256"/>
  </tileset>
  <imagelayer name="Image Layer 1" width="33" height="29">
-  <image source="../images/1_MURDER_ROOM.png"/>
+  <image source="../images/2_VICTIM_APARTMENT.png"/>
  </imagelayer>
  <layer name="collide" width="33" height="29">
   <properties>
@@ -12,15 +12,13 @@
    <property name="solid" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt0jEKACAMQ9GC97+zezFDsSkK/0FxUJoMRgDvW2nUnTM/n6dOql9XfuW96jiRrzrc7OpW2Tnxt37p4BwAAACHDU2xALg=
+   eJxjYBgFo2AUUAKYScS0sJ+W6mllHiX6qBmm5OgfjvFIjrnExgWpeYQSv+FzA70APfP/KBgFo2AUjIJRMAoIAwD0wwCg
   </data>
  </layer>
  <objectgroup name="objects" width="33" height="29">
-  <object name="spawn" x="100" y="155"/>
-  <object name="npc" x="216" y="119"/>
-  <object name="door" x="69" y="120">
+  <object name="door" x="372" y="154">
    <properties>
-    <property name="to" value="second"/>
+    <property name="to" value="first"/>
    </properties>
   </object>
  </objectgroup>
