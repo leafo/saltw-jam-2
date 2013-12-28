@@ -4,7 +4,8 @@ require "lovekit.all"
 {graphics: g, :keyboard} = love
 
 import MessageBox, Hud from require "ui"
-import TalkScreen from require "screens"
+import TalkScreen from require "dialog"
+import InventoryScreen from require "inventory"
 
 class Npc extends Entity
   solid: true
@@ -100,11 +101,14 @@ class Game
     @hud\update dt, @
 
   on_key: (key) =>
-    if key == "x"
-      for entity in *@collide\get_touching @player\touch_radius!
-        continue if entity == @player
-        if entity.on_interact
-          entity\on_interact @
+    switch key
+      when "x"
+        for entity in *@collide\get_touching @player\touch_radius!
+          continue if entity == @player
+          if entity.on_interact
+            entity\on_interact @
+      when "c"
+        dispatch\push InventoryScreen @
 
   collides: (entity) =>
     if entity == @player
