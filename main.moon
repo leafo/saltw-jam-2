@@ -65,6 +65,10 @@ class Game
     @collide = UniformGrid!
 
   draw: =>
+    COLOR\push 0,0,0
+    g.rectangle "fill", 0, 0, g.getWidth!, g.getHeight!
+    COLOR\pop!
+
     @viewport\center_on @player
     @viewport\apply!
     @map\draw @viewport

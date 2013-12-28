@@ -157,5 +157,4 @@ class TalkScreen
 
     @viewport\pop!
 
-
 {:TalkScreen}

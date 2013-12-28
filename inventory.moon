@@ -121,5 +121,4 @@ class InventoryScreen
 
     @viewport\pop!
 
-
 { :InventoryScreen }
