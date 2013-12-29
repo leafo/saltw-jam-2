@@ -20,14 +20,34 @@ class Card extends Box
     super 0, 0
     @sprite = imgfy @image
     @label = Label @label
+    @rot = 0
 
   flip: (immediate=false) =>
 
   update: (dt) =>
+    @rot += dt
+
+    if @rot > 2
+      @rot = 0
+
+    true
 
   draw: =>
-    super {255, 100, 100}
-    @sprite\draw @x, @y
+    -- super {255, 100, 100}
+    hw = @w / 2
+
+    rot = if @rot > 1
+      2 - @rot
+    else
+      @rot
+
+    if rot < 0.5
+      sx = (0.5 - rot) * 2
+      @sprite\draw @x + hw, @y, 0, sx, 1, hw
+    else
+      sx = (rot - 0.5) * 2
+      @back_sprite\draw @x + hw, @y, 0, sx, 1, hw
+
     @label.x = @x + (@w - @label.w) / 2
     @label.y = @y + 2
     @label\draw!
