@@ -19,6 +19,7 @@ has_message_box = (cls, msg) ->
 class Door extends Box
   w: 10
   h: 10
+  solid: false
 
   has_message_box @, "Press 'X' to enter door"
 
@@ -38,7 +39,7 @@ class Door extends Box
   update: => true
 
 class Npc extends Entity
-  solid: true
+  solid: false
   has_message_box @, "Press 'X' to schmooze"
 
   on_interact: (world) =>

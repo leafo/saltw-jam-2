@@ -3,12 +3,26 @@
 
 import RevealLabel, VList, Label from require "lovekit.ui"
 
+box_bx_color = {0,0,0, 128}
+
+draw_tick = (x,y, w=6) ->
+  ow = w + 2
+  ow2 = ow/2
+
+  g.rectangle "fill", x - ow2, y - ow2, ow, ow
+  w2 = w/2
+  COLOR\push 255, 100, 100
+  g.rectangle "fill", x - w2, y - w2, w, w
+  COLOR\pop!
+
 class ChoiceBox extends VList
   waiting: true
   current_choice: 1
+  bottom_offset: 10
 
   new: (choices, finished_fn) =>
     super 0, 0, [Label c for c in *choices]
+    @create_time = timer.getTime!
     @seq = Sequence ->
       while true
         switch wait_for_key!
@@ -34,17 +48,16 @@ class ChoiceBox extends VList
     @seq\update dt if @seq
 
     @x = world.viewport\right @w + 10
-    @y = world.viewport\bottom @h + 40
+    @y = world.viewport\bottom @h + @bottom_offset
 
     @waiting
 
   draw: =>
-    Box.draw @, {255, 255, 255, 100}
+    Box.draw @, box_bx_color
     current =  @items[@current_choice]
-    COLOR\push 255, 100, 100
-    g.rectangle "fill", current.x - 12, current.y + (current.h / 2) - 3, 6, 6
-    COLOR\pop!
 
+    if duty_on nil, nil, @create_time
+      draw_tick current.x - 9, current.y + (current.h / 2)
     super!
 
 
@@ -56,17 +69,23 @@ class DialogBox extends Box
   new: (msg, finished_fn) =>
     @seq = Sequence ->
       await (fn) ->
-        @label = RevealLabel msg, 0, 0, fn
+        @label = RevealLabel msg, 0, 0, {
+          fixed_size: true
+          fn
+        }
+
         tween @, 0.2, alpha: 255
 
       @show_next = timer.getTime!
       wait_for_key "x"
-      tween @, 0.2, alpha: 0
-      @waiting = false
+      @show_next = false
       finished_fn!
 
+      wait_until -> not @waiting
+      tween @, 0.2, alpha: 0
+
   update: (dt, world) =>
-    @seq\update dt
+    running = @seq\update dt
     @label\update dt
 
     @x = world.viewport\left 10
@@ -79,18 +98,16 @@ class DialogBox extends Box
     @label.x = @x
     @label.y = @y
 
-    @waiting
+    running
 
   draw: =>
     unless @alpha == 255
       COLOR\pusha @alpha
 
-    super {255, 255, 255, 100}
+    super box_bx_color
 
     if @show_next and duty_on nil, nil, @show_next
-      COLOR\push 255, 100, 100
-      g.rectangle "fill", @x + @w - 4, @y + @h - 4, 8, 8
-      COLOR\pop!
+      draw_tick @x + @w, @y + @h
 
     @label\draw! if @label
 
@@ -102,34 +119,32 @@ class Dialog extends Sequence
   scope = @default_scope
 
   @extend {
-    dialog: (container, msg) ->
-      scope.await (fn) ->
-        container.entities\add DialogBox msg, fn
+    get_card: (parent) ->
 
-    choice: (container, choices) ->
+    dialog: (parent, msg) ->
       scope.await (fn) ->
-        container.entities\add ChoiceBox choices, fn
+        if parent.current_dialog
+          parent.current_dialog.waiting = false
 
+        parent.current_dialog = DialogBox msg, fn
+        parent.entities\add parent.current_dialog
+
+    choice: (parent, choices) ->
+      scope.await (fn) ->
+        parent.entities\add with ChoiceBox choices, fn
+          if d = parent.current_dialog
+            .bottom_offset = ChoiceBox.bottom_offset * 2 + d.h
   }
 
-class Head
-  w: 100
-  h: 100
-
-  new: (@x, @y) =>
-
-  draw: =>
-    COLOR\push 241, 221, 87
-    g.rectangle "fill", @x, @y, @w, @h
-    COLOR\pop!
-
 class TalkScreen
+  image: "images/SCENE_BED.png"
+
   new: =>
     @viewport = Viewport scale: game_config.scale
-    @head = Head 10, 10
     @entities = DrawList!
 
     @seqs = DrawList!
+    @bg = imgfy @image
 
     @seqs\add Dialog ->
       dialog @, "Pick one of these choices and I'll fart yr face there Pal"
@@ -151,9 +166,9 @@ class TalkScreen
 
   draw: =>
     @viewport\apply!
-    @entities\draw!
+    @bg\draw 0, 0
 
-    @head\draw!
+    @entities\draw!
 
     @viewport\pop!
 
