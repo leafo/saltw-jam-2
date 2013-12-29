@@ -116,7 +116,7 @@ return {
           height = 0,
           visible = true,
           properties = {
-            ["to"] = "second"
+            ["to"] = "apartment"
           }
         }
       }

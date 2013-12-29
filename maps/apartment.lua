@@ -94,7 +94,7 @@ return {
           height = 0,
           visible = true,
           properties = {
-            ["to"] = "first"
+            ["to"] = "murder"
           }
         }
       }

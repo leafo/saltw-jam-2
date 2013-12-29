@@ -20,7 +20,7 @@
   <object name="npc" x="216" y="119"/>
   <object name="door" x="78" y="127">
    <properties>
-    <property name="to" value="second"/>
+    <property name="to" value="apartment"/>
    </properties>
   </object>
  </objectgroup>
