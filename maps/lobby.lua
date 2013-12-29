@@ -97,6 +97,19 @@ return {
           properties = {
             ["name"] = "closed_door"
           }
+        },
+        {
+          name = "door",
+          type = "",
+          shape = "rectangle",
+          x = 336,
+          y = 211,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {
+            ["to"] = "travel"
+          }
         }
       }
     }

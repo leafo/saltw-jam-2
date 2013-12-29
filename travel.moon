@@ -13,7 +13,7 @@ class Place extends Box
   w: 200
   h: 150
 
-  new: (name, img) =>
+  new: (name, @to, img) =>
     @label = Label name
     @sprite = imgfy img if img
 
@@ -31,19 +31,17 @@ class PlaceList extends HList
   current_choice: 1
   ox: 0
 
-  new: (v) =>
+  new: (v, opts={}) =>
     b = Box 0,0,200,150
 
-    super (v.w - b.w) / 2, (v.h - b.h) / 2, {
+    super (v.w - b.w) / 2, (v.h - b.h) / 2, merge {
       padding: 40
 
-      Place "Barf"
-      Place "Satan"
-    }
+      Place "BONE OFFICE", "office"
+      Place "APARTMENT LOBBY", "lobby"
+    }, opts
 
     @seq = Sequence ->
-      if item = @items[@current_choice]
-        @on_select item
 
       while true
         switch wait_for_key!
@@ -52,7 +50,8 @@ class PlaceList extends HList
           when "right"
             @move 1
           when "x"
-            print "Enter the place"
+            if item = @items[@current_choice]
+              @on_select item
   
   move: (dir) =>
     before = @current_choice
@@ -60,8 +59,6 @@ class PlaceList extends HList
 
     if @current_choice == before
       print "play Brrrt"
-    else
-      @on_select @items[@current_choice]
   
   update: (dt, viewport) =>
     if current = @items[@current_choice]
@@ -77,14 +74,18 @@ class PlaceList extends HList
     super!
     g.pop!
 
-  on_select: (item) =>
-
 class TravelScreen
   new: (@game) =>
     @viewport = Viewport scale: game_config.scale
     @entities = DrawList!
 
-    place_list = PlaceList @viewport
+    place_list = PlaceList @viewport, {
+      on_select: (list, place) ->
+        room = @game.rooms[place.to]
+        room\place_player "travel"
+        dispatch\replace room
+    }
+
     @entities\add place_list
     @entities\add CenterBin @viewport.w/2, 10, RevealLabel "Choose a destination", 0,0, {
       fixed_size: true
@@ -97,7 +98,7 @@ class TravelScreen
 
   on_key: (key) =>
     if key == "c"
-      dispatch\pop!
+      print "play Brrrt"
 
   update: (dt) =>
     @entities\update dt

@@ -26,5 +26,10 @@
     <property name="name" value="closed_door"/>
    </properties>
   </object>
+  <object name="door" x="336" y="211">
+   <properties>
+    <property name="to" value="travel"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

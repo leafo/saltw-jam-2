@@ -112,8 +112,8 @@ class Room
           if entity.on_interact
             entity\on_interact @
       when "c"
-        -- dispatch\push InventoryScreen @
-        dispatch\push TravelScreen @
+        -- dispatch\push InventoryScreen @game
+        dispatch\replace TravelScreen @game
 
   update: (dt) =>
     @collide\clear!
