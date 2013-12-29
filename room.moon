@@ -107,14 +107,13 @@ class Room
 
   on_key: (key) =>
     switch key
-      when "x"
+      when GAME_CONFIG.key.confirm
         for entity in *@collide\get_touching @player\touch_radius!
           continue if entity == @player
           if entity.on_interact
             entity\on_interact @
-      when "c"
-        -- dispatch\push InventoryScreen @game
-        dispatch\replace TravelScreen @game
+      when GAME_CONFIG.key.cancel
+        dispatch\push InventoryScreen @game
 
   update: (dt) =>
     @collide\clear!

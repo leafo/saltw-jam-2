@@ -45,11 +45,11 @@ class PlaceList extends HList
 
       while true
         switch wait_for_key!
-          when "left"
+          when GAME_CONFIG.key.left
             @move -1
-          when "right"
+          when GAME_CONFIG.key.right
             @move 1
-          when "x"
+          when GAME_CONFIG.key.confirm
             if item = @items[@current_choice]
               @on_select item
   
@@ -97,7 +97,7 @@ class TravelScreen
     @viewport\pop!
 
   on_key: (key) =>
-    if key == "c"
+    if key == GAME_CONFIG.key.cancel
       print "play Brrrt"
 
   update: (dt) =>

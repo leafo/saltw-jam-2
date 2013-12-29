@@ -98,7 +98,7 @@ class InventoryScreen
     @entities\update dt, @viewport
 
   on_key: (key) =>
-    if key == "c"
+    if key == GAME_CONFIG.key.cancel
       dispatch\pop!
 
   draw: =>

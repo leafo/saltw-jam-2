@@ -3,6 +3,11 @@ export GAME_CONFIG = {
   key: {
     confirm: "x"
     cancel: "c"
+
+    up: "up"
+    down: "down"
+    left: "left"
+    right: "right"
   }
 }
 

@@ -26,11 +26,11 @@ class ChoiceBox extends VList
     @seq = Sequence ->
       while true
         switch wait_for_key!
-          when "up"
+          when GAME_CONFIG.key.up
             @move -1
-          when "down"
+          when GAME_CONFIG.key.down
             @move 1
-          when "x"
+          when GAME_CONFIG.key.confirm
             break
 
       @waiting = false
@@ -77,7 +77,7 @@ class DialogBox extends Box
         tween @, 0.2, alpha: 255
 
       @show_next = timer.getTime!
-      wait_for_key "x"
+      wait_for_key GAME_CONFIG.key.confirm
       @show_next = false
       finished_fn!
 
