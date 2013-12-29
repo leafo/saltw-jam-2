@@ -2,27 +2,10 @@
 { graphics: g } = love
 
 import VList, Label, RevealLabel from require "lovekit.ui"
+import Card from require "cards"
 
 ez_approach = (val, target, dt) ->
   approach val, target, dt * 10 * math.max 1, math.abs val - target
-
-class Card extends Box
-  w: 60
-  h: 75
-  lazy sprite: -> imgfy "images/CARD_BACK.png"
-
-  new: (label="Card", @detailed_label="...") =>
-    super 0, 0
-    @label = Label label
-
-  update: (dt) =>
-
-  draw: =>
-    super {255, 100, 100}
-    @sprite\draw @x, @y
-    @label.x = @x + 2
-    @label.y = @y + 2
-    @label\draw!
 
 class CardList extends VList
   current_choice: 1
@@ -95,13 +78,14 @@ class InventoryScreen
     }
 
     card_list = CardList @viewport\right(5), @viewport\top(5), {
-      Card "Piss\nCard", "This card is about 1 thing and that's freaking piss"
-      Card "Thug\nCard", "Once a thug forever a man of the streets, wiser by the night and more HUNGRY when mum forgets to feed you"
-      Card "Lovers\nCard", "Making love is a way of life I explain to my inflatable partner"
-      Card "Satan\nCard", "Let your demons out, show me your spunk"
+      Card.cards.bones
+      Card.cards.knife
+      Card.cards.murder
+      Card.cards.slug
+      Card.cards.spook
 
       on_select: (list, item) ->
-        label = RevealLabel item.detailed_label
+        label = RevealLabel item.description
         label\set_max_width left_col_width
         card_data.items[2] = label
     }
