@@ -3,7 +3,7 @@
 
 import RevealLabel, VList, Label from require "lovekit.ui"
 
-box_bx_color = {0,0,0, 128}
+box_bx_color = {0,0,0, 80}
 
 draw_tick = (x,y, w=6) ->
   ow = w + 2
@@ -85,8 +85,13 @@ class DialogBox extends Box
       tween @, 0.2, alpha: 0
 
   update: (dt, world) =>
+    mult = if keyboard.isDown "c"
+      4
+    else
+      1
+
     running = @seq\update dt
-    @label\update dt
+    @label\update dt * mult
 
     @x = world.viewport\left 10
     @y = world.viewport\bottom(10) - @label.h
