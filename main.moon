@@ -8,7 +8,7 @@ import Room from require "room"
 class Game
   @init: =>
     game = Game!
-    game.rooms.first
+    game.rooms.murder
 
   new: =>
     @rooms = setmetatable {}, __index: (tbl, name) ->
