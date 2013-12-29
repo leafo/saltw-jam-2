@@ -9,6 +9,7 @@ ez_approach = (val, target, dt) ->
 class Card extends Box
   w: 60
   h: 75
+  lazy sprite: -> imgfy "images/CARD_BACK.png"
 
   new: (label="Card", @detailed_label="...") =>
     super 0, 0
@@ -18,6 +19,7 @@ class Card extends Box
 
   draw: =>
     super {255, 100, 100}
+    @sprite\draw @x, @y
     @label.x = @x + 2
     @label.y = @y + 2
     @label\draw!
