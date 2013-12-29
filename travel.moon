@@ -76,7 +76,7 @@ class PlaceList extends HList
 
 class TravelScreen
   new: (@game) =>
-    @viewport = Viewport scale: game_config.scale
+    @viewport = Viewport scale: GAME_CONFIG.scale
     @entities = DrawList!
 
     place_list = PlaceList @viewport, {

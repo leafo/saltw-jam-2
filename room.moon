@@ -66,7 +66,7 @@ class Player extends Entity
 
 class Room
   new: (@game, @name) =>
-    @viewport = Viewport scale: game_config.scale
+    @viewport = Viewport scale: GAME_CONFIG.scale
     @entities = DrawList!
     @doors = {}
 

@@ -61,7 +61,7 @@ class CardList extends VList
 
 class InventoryScreen
   new: (@game) =>
-    @viewport = Viewport scale: game_config.scale
+    @viewport = Viewport scale: GAME_CONFIG.scale
     @entities = DrawList!
 
     local *

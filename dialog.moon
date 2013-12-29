@@ -85,7 +85,7 @@ class DialogBox extends Box
       tween @, 0.2, alpha: 0
 
   update: (dt, world) =>
-    mult = if keyboard.isDown "c"
+    mult = if keyboard.isDown GAME_CONFIG.key.cancel
       4
     else
       1
@@ -145,7 +145,7 @@ class TalkScreen
   image: "images/SCENE_BED.png"
 
   new: =>
-    @viewport = Viewport scale: game_config.scale
+    @viewport = Viewport scale: GAME_CONFIG.scale
     @entities = DrawList!
 
     @seqs = DrawList!
