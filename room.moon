@@ -149,7 +149,7 @@ class Room
     @map\collides entity
 
   place_player: (source) =>
-    @player\move_center @doors[source]\center!
+    @player\move_center assert(@doors[source], "couldn't find #{source} door")\center!
 
 
 { :Room }

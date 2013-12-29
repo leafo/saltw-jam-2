@@ -12,13 +12,18 @@
    <property name="solid" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUUAKYScS0sJ+W6mllHiX6qBmm5OgfjvFIjrnExgWpeYQSv+FzA70APfP/KBgFo2AUjIJRMAoIAwD0wwCg
+   eJzt00EKACAIRFGh+9+5E0iNOtHiP2hXKpoRADqWeBz51fuTdXRiVd46elrp4bQfalDj3s5C3RHHn3L1K8v1av8BAMDZBhWuAKM=
   </data>
  </layer>
  <objectgroup name="objects" width="33" height="29">
-  <object name="door" x="367" y="157">
+  <object name="door" x="371" y="147">
    <properties>
     <property name="to" value="murder"/>
+   </properties>
+  </object>
+  <object name="door" x="182" y="211">
+   <properties>
+    <property name="to" value="lobby"/>
    </properties>
   </object>
  </objectgroup>

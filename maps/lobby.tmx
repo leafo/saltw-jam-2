@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="41" height="17" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16">
+  <image source="../images/tiles.png" width="256" height="256"/>
+ </tileset>
+ <imagelayer name="Image Layer 1" width="41" height="17">
+  <image source="../images/3_LOBBY.png"/>
+ </imagelayer>
+ <layer name="collide" width="41" height="17">
+  <properties>
+   <property name="hidden" value="true"/>
+   <property name="solid" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjHTAjITJ0UOKPlLMxGU+PnX43ESsOnzuGyhArN2D2Y3UTCuUAHxuGAzuAwFCbqQEU9NcWoChEj/0DpdRQDoAAOg5AOs=
+  </data>
+ </layer>
+ <objectgroup name="objects" width="41" height="17">
+  <object name="door" x="212" y="126">
+   <properties>
+    <property name="to" value="apartment"/>
+   </properties>
+  </object>
+  <object name="npc" x="432" y="124">
+   <properties>
+    <property name="name" value="closed_door"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

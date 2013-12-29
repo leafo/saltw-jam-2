@@ -95,6 +95,10 @@ class TravelScreen
     @entities\draw dt, @viewport
     @viewport\pop!
 
+  on_key: (key) =>
+    if key == "c"
+      dispatch\pop!
+
   update: (dt) =>
     @entities\update dt
 
