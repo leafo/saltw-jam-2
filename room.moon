@@ -5,6 +5,7 @@ import MessageBox from require "ui"
 import TalkScreen from require "dialog"
 import Hud from require "ui"
 import InventoryScreen from require "inventory"
+import TravelScreen from require "travel"
 
 has_message_box = (cls, msg) ->
   cls.__base.on_nearby = (world) =>
@@ -111,7 +112,8 @@ class Room
           if entity.on_interact
             entity\on_interact @
       when "c"
-        dispatch\push InventoryScreen @
+        -- dispatch\push InventoryScreen @
+        dispatch\push TravelScreen @
 
   update: (dt) =>
     @collide\clear!

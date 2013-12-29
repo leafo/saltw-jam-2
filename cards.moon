@@ -25,10 +25,10 @@ class Card extends Box
   flip: (immediate=false) =>
 
   update: (dt) =>
-    @rot += dt
+    -- @rot += dt
 
-    if @rot > 2
-      @rot = 0
+    -- if @rot > 2
+    --   @rot = 0
 
     true
 
