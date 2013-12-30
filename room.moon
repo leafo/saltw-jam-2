@@ -38,7 +38,8 @@ class Door extends Box
       dispatch\replace dest
 
   draw: =>
-    super {255, 100, 255, 64}
+    if SHOW_BOXES
+      super {255, 100, 255, 64}
 
   update: => true
 
@@ -55,7 +56,8 @@ class SceneTrigger extends Entity
     dispatch\push scene_cls room.game
 
   draw: =>
-    super {255,100,100}
+    if SHOW_BOXES
+      super {255,100,100}
 
   update: (dt) =>
     true

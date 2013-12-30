@@ -8,6 +8,8 @@ import Room from require "room"
 export ez_approach = (val, target, dt) ->
   approach val, target, dt * 10 * math.max 1, math.abs val - target
 
+export SHOW_BOXES = false
+
 sealed = (tbl) ->
   setmetatable tbl, {
     __newindex: => error "tried to add to sealed table"
@@ -50,7 +52,7 @@ class Game
 
   @init: =>
     game = Game!
-    game\get_room "apartment"
+    game\get_room "office"
 
 load_font = (img, chars)->
   font_image = imgfy img
