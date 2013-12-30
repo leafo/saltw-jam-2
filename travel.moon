@@ -72,6 +72,7 @@ class TravelScreen
   places: lazy_tbl {
     office: => Place "BONE OFFICE", "office"
     lobby: => Place "APARTMENTS", "lobby"
+    cemetary: => Place "CEMETARY", "cemetary"
   }
 
   new: (@game) =>

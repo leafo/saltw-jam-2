@@ -18,6 +18,7 @@ class Game
     @unlocked_places = sealed {
       office: true
       lobby: false
+      cemetary: false
     }
 
     @obtained_cards = sealed {
@@ -26,6 +27,10 @@ class Game
       murder: false
       slug: false
       spook: false
+    }
+
+    @events = sealed {
+      seen_body: false
     }
 
   get_room: (name) =>
