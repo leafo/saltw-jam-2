@@ -95,7 +95,7 @@ Card.cards = lazy_tbl {
 
   slug: ->
     Card {
-      label: "SLUG"
+      label: {"SLUG", "BOY"}
       description: "You knew him only as SLUGBOY, through a bone exchange
       website. He was stabbed in the chest and died from a stab in the chest."
       image: "images/card_faecs/CARD_SLUG.png"
@@ -103,7 +103,7 @@ Card.cards = lazy_tbl {
 
   spook: ->
     Card {
-      label: "MURDER"
+      label: {"SPOOK", "BOY"}
       description: "Seems to be a friend of SLUGBOY's. They were going to meet
       up at the graveyard, but then he died."
       image: "images/card_faecs/CARD_SPOOK.png"
