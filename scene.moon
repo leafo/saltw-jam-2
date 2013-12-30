@@ -256,7 +256,7 @@ class Dialog extends Sequence
       scope.await (fn) ->
         parent.entities\add with ChoiceBox choices, fn
           if d = parent.current_dialog
-            .bottom_offset = ChoiceBox.bottom_offset * 2 + d.h
+            .bottom_offset = parent.viewport.h - d.y + 10
   }
 
   -- bind all methods
