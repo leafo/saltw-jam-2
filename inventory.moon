@@ -57,7 +57,6 @@ class CardList extends VList
   on_select: (item) =>
     -- override me
 
-
 class InventoryScreen
   new: (@game) =>
     @viewport = Viewport scale: GAME_CONFIG.scale
@@ -65,7 +64,7 @@ class InventoryScreen
 
     cards = @game\get_obtained_cards!
     if next cards
-      @setup_cards!
+      @setup_cards cards
     else
       @setup_no_cards!
 
@@ -73,25 +72,21 @@ class InventoryScreen
     x,y,w,h = @viewport\unpack!
     @entities\add Bin x,y,w,h, Label("Your inventory is empty")
 
-  setup_cards: =>
+  setup_cards: (cards) =>
     local *
 
-    left_col_width = @viewport.w - Card.w - 20
+    left_col_width = @viewport.w - Card.w - 40
 
     card_data = VList @viewport\left(5), @viewport\top(5), {
-      with Box(0,0,left_col_width, 100)
-        .draw = =>
-          COLOR\pusha 64
-          Box.draw @
-          g.print "Item picture goes here...", @x + 5, @y + 5
-          COLOR\pop!
+      Label "INVENTORY (#{#cards} card#{#cards != 1 and "s" or ""})"
+      Box 0,0, 200, 1
     }
 
     card_list = CardList {
       on_select: (list, item) ->
         label = RevealLabel item.description
         label\set_max_width left_col_width
-        card_data.items[2] = label
+        card_data.items[3] = label
 
       unpack cards
     }
