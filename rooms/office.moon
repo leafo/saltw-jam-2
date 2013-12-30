@@ -25,6 +25,27 @@ class BoneScene extends Scene
 class ComputerScene extends Scene
   bg_image: "images/SCENE_OFFICECOMP.png"
 
+
+  sequence: =>
+    dialog "There's an e-mail on screen."
+    dialog [[
+      "Damn, nice bones. Real nice. A guy could have a good time
+      with those bones. In exchange for the bones, I'll give you
+      the bucks...
+    ]]
+
+    dialog [[
+      Bring them round to my place in a few days.
+      I'm at 233 BLOOD STREET. It's the block of apartments by the
+      SAD HOUSE.
+      - Slugboy"
+    ]]
+
+    get_place @game\get_place("lobby").name
+    @game.unlocked_places.lobby = true
+
+    dispatch\pop!
+
 class OfficeRoom extends Room
   map_name: "office"
   scenes: {

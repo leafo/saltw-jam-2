@@ -19,6 +19,51 @@ draw_tick = (x,y, w=6) ->
   COLOR\pop!
 
 
+class GetPlace extends Box
+  alpha: 0
+  waiting: true
+  bg_color: {0,0,0, 128}
+
+  new: (place_name, fn) =>
+    @entities = DrawList!
+    @content = VList {
+      xalign: "center"
+      Label "You unlocked a new place"
+      Label '"'.. place_name .. '"'
+      Label "" -- spacer
+      Label "" -- spacer 2
+    }
+
+    @anchor = CenterAnchor 0,0, @content
+
+    @entities\add @anchor
+
+    @seq = Sequence ->
+      tween @, 0.8, alpha: 255
+
+      @content.items[4] = RevealLabel "Press 'X' to continue",
+        0,0, fixed_size: true
+
+      wait_for_key GAME_CONFIG.key.confirm
+
+      tween @, 1, alpha: 0
+      wait 0.1
+
+      fn! if fn
+
+  update: (dt, world) =>
+    @x, @y, @w, @h = world.viewport\unpack!
+    @anchor.x, @anchor.y = @center!
+
+    @entities\update dt
+    @seq\update dt
+
+  draw: =>
+    COLOR\pusha @alpha
+    super @bg_color
+    @entities\draw!
+    COLOR\pop!
+
 class GetCard extends Box
   alpha: 0
   waiting: true
@@ -50,7 +95,7 @@ class GetCard extends Box
 
     @seq = Sequence ->
       card.rot = 1
-      tween @, 0.4, alpha: 255
+      tween @, 0.8, alpha: 255
       tween card, 1, rot: 0
 
       @content.items[3] = RevealLabel "Press 'X' to continue",
@@ -189,6 +234,10 @@ class Dialog extends Sequence
     get_card: (parent, card) ->
       scope.await (fn) ->
         parent.entities\add GetCard card, fn
+
+    get_place: (parent, place) ->
+      scope.await (fn) ->
+        parent.entities\add GetPlace place, fn
 
     dialog: (parent, msg) ->
       scope.await (fn) ->

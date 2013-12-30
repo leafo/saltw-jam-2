@@ -13,7 +13,7 @@ class Place extends Box
   w: 200
   h: 150
 
-  new: (name, @to, img) =>
+  new: (@name, @to, img) =>
     @label = Label name
     @sprite = imgfy img if img
 
@@ -74,7 +74,7 @@ class PlaceList extends HList
 class TravelScreen
   places: lazy_tbl {
     office: => Place "BONE OFFICE", "office"
-    lobby: => Place "APARTMENT LOBBY", "lobby"
+    lobby: => Place "APARTMENTS", "lobby"
   }
 
   new: (@game) =>

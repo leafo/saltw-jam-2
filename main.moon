@@ -28,6 +28,11 @@ class Game
   get_room: (name) =>
     require("rooms.#{name}") @
 
+  get_place: (name) =>
+    import TravelScreen from require "travel"
+    assert TravelScreen.places[name],
+      "unknown place `#{name}`"
+
   get_unlocked_places: =>
     [k for k,v in pairs(@unlocked_places) when v]
 
