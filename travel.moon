@@ -4,7 +4,7 @@
 ez_approach = (val, target, dt) ->
   approach val, target, dt * 10 * math.max 1, math.abs val - target
 
-import HList, Label, RevealLabel, CenterBin from require "lovekit.ui"
+import HList, Label, RevealLabel, CenterAnchor from require "lovekit.ui"
 
 class Place extends Box
   x: 0
@@ -87,7 +87,7 @@ class TravelScreen
     }
 
     @entities\add place_list
-    @entities\add CenterBin @viewport.w/2, 10, RevealLabel "Choose a destination", 0,0, {
+    @entities\add CenterAnchor @viewport.w/2, 10, RevealLabel "Choose a destination", 0,0, {
       fixed_size: true
     }
 
