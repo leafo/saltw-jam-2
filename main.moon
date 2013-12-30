@@ -11,7 +11,7 @@ class Game
 
   @init: =>
     game = Game!
-    game\get_room "murder"
+    game\get_room "office"
 
 load_font = (img, chars)->
   font_image = imgfy img

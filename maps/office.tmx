@@ -21,8 +21,8 @@
     <property name="to" value="travel"/>
    </properties>
   </object>
-  <object name="spawn" x="254" y="135"/>
-  <object name="scene" x="98" y="82" width="42" height="30">
+  <object name="spawn" x="154" y="85"/>
+  <object name="scene" x="95" y="99" width="39" height="13">
    <properties>
     <property name="name" value="bones"/>
    </properties>

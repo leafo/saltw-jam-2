@@ -86,13 +86,13 @@ return {
           }
         },
         {
-          name = "npc",
+          name = "scene",
           type = "",
           shape = "rectangle",
-          x = 432,
-          y = 124,
-          width = 0,
-          height = 0,
+          x = 406,
+          y = 100,
+          width = 48,
+          height = 23,
           visible = true,
           properties = {
             ["name"] = "closed_door"

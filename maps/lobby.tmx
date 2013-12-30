@@ -21,7 +21,7 @@
     <property name="to" value="apartment"/>
    </properties>
   </object>
-  <object name="npc" x="432" y="124">
+  <object name="scene" x="406" y="100" width="48" height="23">
    <properties>
     <property name="name" value="closed_door"/>
    </properties>
