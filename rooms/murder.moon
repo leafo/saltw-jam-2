@@ -12,8 +12,6 @@ class BedScene extends Scene
     if "Investigate" == choice { "Investigate", "Walk away" }
       get_card "coolcard"
 
-    dispatch\pop!
-
 
 class PictureScene extends Scene
   bg_image: "images/SCENE_TORNPIC.png"

@@ -20,8 +20,6 @@ class BoneScene extends Scene
       @game.obtained_cards.bones = true
       get_card "bones"
 
-    dispatch\pop!
-
 class ComputerScene extends Scene
   bg_image: "images/SCENE_OFFICECOMP.png"
 
@@ -43,8 +41,6 @@ class ComputerScene extends Scene
 
     get_place @game\get_place("lobby").name
     @game.unlocked_places.lobby = true
-
-    dispatch\pop!
 
 class OfficeRoom extends Room
   map_name: "office"

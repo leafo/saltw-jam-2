@@ -263,7 +263,6 @@ class Scene
   verb: "examine"
   sequence: =>
     wait_for_key GAME_CONFIG.key.cancel, GAME_CONFIG.key.confirm
-    dispatch\pop!
 
   new: (@game) =>
     @viewport = Viewport scale: GAME_CONFIG.scale
@@ -273,7 +272,11 @@ class Scene
     @bg = imgfy @bg_image
 
     if @sequence
-      @seqs\add Dialog @sequence, @
+      wrapped = (...) ->
+        run @sequence, ...
+        dispatch\pop!
+
+      @seqs\add Dialog wrapped, @
 
   add_dialog: (dialog) =>
     if @current_dialog
