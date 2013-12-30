@@ -93,6 +93,8 @@ class Room
     @nearby = {}
     @collide = UniformGrid!
 
+    @on_enter!
+
   create_map: =>
     @map = TileMap.from_tiled "maps.#{@map_name}", {
       object: (o) ->
@@ -123,6 +125,8 @@ class Room
     @hud\draw!
 
     @viewport\pop!
+
+  on_enter: => -- enter room
 
   on_key: (key) =>
     switch key

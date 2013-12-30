@@ -73,7 +73,8 @@ class GetCard extends Box
     @entities = DrawList!
     import Card from require "cards"
 
-    card = Card.cards[card_name]
+    card = assert Card.cards[card_name],
+      "unknown card #{card_name}"
 
     @content = VList {
       xalign: "center"
@@ -249,7 +250,8 @@ class Dialog extends Sequence
     get_card: (parent, card) ->
       {:game} = parent
       return if game.obtained_cards[card]
-      game.obtained_cards.bones = true
+      game.obtained_cards[card] = true
+
       scope.await (fn) ->
         parent.entities\add GetCard card, fn
 
