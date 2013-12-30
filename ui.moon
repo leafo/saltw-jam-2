@@ -4,7 +4,7 @@
 import RevealLabel from require "lovekit.ui"
 
 class Hud
-  new: (@world) =>
+  new: (@room) =>
     @entities = DrawList!
 
   add: (...) =>
@@ -17,14 +17,14 @@ class Hud
     @entities\add box
 
   update: (dt) =>
-    @entities\update dt, @world
+    @entities\update dt, @room
 
   draw: =>
-    {viewport: v} = @world
+    {viewport: v} = @room
 
     g.push!
     g.translate v.x, v.y
-    @entities\draw @world.viewport
+    @entities\draw @room.viewport
 
     g.pop!
 

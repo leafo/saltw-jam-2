@@ -8,11 +8,11 @@ import InventoryScreen from require "inventory"
 import TravelScreen from require "travel"
 
 has_message_box = (cls, msg) ->
-  cls.__base.on_nearby = (world) =>
+  cls.__base.on_nearby = (room) =>
     @msg_box = MessageBox msg or @interact_message
-    world.hud\add_message_box @msg_box
+    room.hud\add_message_box @msg_box
 
-  cls.__base.off_nearby = (world) =>
+  cls.__base.off_nearby = (room) =>
     if @msg_box
       @msg_box\hide -> @msg_box = nil
 
@@ -27,11 +27,15 @@ class Door extends Box
     super 0, 0
     @move_center x, y
 
-  on_interact: (world) =>
-    room = world.game\get_room @to
-    room\place_player world.name
+  on_interact: (room) =>
+    print "going to", @to
+    if @to == "travel"
+      dispatch\replace TravelScreen room.game
+    else
+      dest = room.game\get_room @to
+      dest\place_player room.map_name
 
-    dispatch\replace room
+      dispatch\replace dest
 
   draw: =>
     super {255, 100, 255, 64}
@@ -46,24 +50,24 @@ class SceneTrigger extends Entity
     super x,y,w,h
     @interact_message = "Press 'X' to #{@scene_cls.verb}"
 
-  on_interact: (world) =>
+  on_interact: (room) =>
     {:scene_cls} = @
-    dispatch\push scene_cls world
+    dispatch\push scene_cls room
 
   draw: =>
     super {255,100,100}
 
-  update: (dt, world) =>
+  update: (dt) =>
     true
 
 class Player extends Entity
   solid: true
   speed: 200
 
-  update: (dt, world) =>
+  update: (dt, room) =>
     move = movement_vector!
     dx, dy = unpack move * (dt * @speed)
-    @fit_move dx, dy, world
+    @fit_move dx, dy, room
     true
 
   touch_radius: =>
