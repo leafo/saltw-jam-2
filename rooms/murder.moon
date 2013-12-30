@@ -21,6 +21,9 @@ class PictureScene extends Scene
 class KnifeScene extends Scene
   bg_image: "images/SCENE_KNIFE.png"
 
+class BodyScene extends Scene
+  bg_image: "images/SCENE_BODY.png"
+
 class MurderRoom extends Room
   map_name: "murder"
 
@@ -28,4 +31,5 @@ class MurderRoom extends Room
     bed: BedScene
     picture: PictureScene
     knife: KnifeScene
+    body: BodyScene
   }

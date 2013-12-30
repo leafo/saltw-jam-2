@@ -146,6 +146,19 @@ return {
           properties = {
             ["name"] = "knife"
           }
+        },
+        {
+          name = "scene",
+          type = "",
+          shape = "rectangle",
+          x = 166,
+          y = 158,
+          width = 64,
+          height = 20,
+          visible = true,
+          properties = {
+            ["name"] = "body"
+          }
         }
       }
     }

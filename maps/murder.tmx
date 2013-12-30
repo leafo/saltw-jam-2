@@ -37,5 +37,10 @@
     <property name="name" value="knife"/>
    </properties>
   </object>
+  <object name="scene" x="166" y="158" width="64" height="20">
+   <properties>
+    <property name="name" value="body"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
