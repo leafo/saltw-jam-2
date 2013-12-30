@@ -19,12 +19,13 @@ draw_tick = (x,y, w=6) ->
 class GetCard extends Box
   alpha: 0
   waiting: true
+  bg_color: {0,0,0, 128}
 
   new: (fn) =>
     @entities = DrawList!
     import Card from require "cards"
 
-    card = Card.cards.bones
+    card = Card.cards.murder
 
     @content = VList {
       xalign: "center"
@@ -61,7 +62,7 @@ class GetCard extends Box
 
   draw: =>
     COLOR\pusha @alpha
-    super {0,0,0, 128}
+    super @bg_color
     @entities\draw!
     COLOR\pop!
 
@@ -201,7 +202,7 @@ class TalkScreen
 
   new: =>
     @viewport = Viewport scale: GAME_CONFIG.scale
-    @entities = DrawList!
+    @entities = EntityList!
 
     @seqs = DrawList!
     @bg = imgfy @image
