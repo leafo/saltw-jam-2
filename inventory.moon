@@ -1,7 +1,7 @@
 
 { graphics: g } = love
 
-import Anchor, VList, Label, RevealLabel from require "lovekit.ui"
+import Anchor, VList, Label, RevealLabel, Bin from require "lovekit.ui"
 import Card from require "cards"
 
 ez_approach = (val, target, dt) ->
@@ -63,6 +63,17 @@ class InventoryScreen
     @viewport = Viewport scale: GAME_CONFIG.scale
     @entities = DrawList!
 
+    cards = @game\get_obtained_cards!
+    if next cards
+      @setup_cards!
+    else
+      @setup_no_cards!
+
+  setup_no_cards: =>
+    x,y,w,h = @viewport\unpack!
+    @entities\add Bin x,y,w,h, Label("Your inventory is empty")
+
+  setup_cards: =>
     local *
 
     left_col_width = @viewport.w - Card.w - 20
@@ -77,16 +88,12 @@ class InventoryScreen
     }
 
     card_list = CardList {
-      Card.cards.bones
-      Card.cards.knife
-      Card.cards.murder
-      Card.cards.slug
-      Card.cards.spook
-
       on_select: (list, item) ->
         label = RevealLabel item.description
         label\set_max_width left_col_width
         card_data.items[2] = label
+
+      unpack cards
     }
 
     @entities\add Anchor @viewport\right(5), @viewport\top(5), card_list, "right", "top"
