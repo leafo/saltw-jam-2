@@ -1,7 +1,7 @@
 
 { graphics: g } = love
 
-import VList, Label, RevealLabel from require "lovekit.ui"
+import Anchor, VList, Label, RevealLabel from require "lovekit.ui"
 import Card from require "cards"
 
 ez_approach = (val, target, dt) ->
@@ -21,9 +21,8 @@ class CardList extends VList
     else
       @on_select @items[@current_choice]
 
-  new: (x,y, cards={}) =>
-    cards.xalign or= "right"
-    super x, y, cards
+  new: (...) =>
+    super ...
 
     @seq = Sequence ->
       if item = @items[@current_choice]
@@ -77,7 +76,7 @@ class InventoryScreen
           COLOR\pop!
     }
 
-    card_list = CardList @viewport\right(5), @viewport\top(5), {
+    card_list = CardList {
       Card.cards.bones
       Card.cards.knife
       Card.cards.murder
@@ -90,7 +89,7 @@ class InventoryScreen
         card_data.items[2] = label
     }
 
-    @entities\add card_list
+    @entities\add Anchor @viewport\right(5), @viewport\top(5), card_list, "right", "top"
     @entities\add card_data
 
 
