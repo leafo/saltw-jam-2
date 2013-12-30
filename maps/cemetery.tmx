@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="33" height="29" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16">
+  <image source="../images/tiles.png" width="256" height="256"/>
+ </tileset>
+ <imagelayer name="Image Layer 1" width="33" height="29">
+  <image source="../images/4_CEMETARY.png"/>
+ </imagelayer>
+ <layer name="collide" width="33" height="29">
+  <properties>
+   <property name="hidden" value="true"/>
+   <property name="solid" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlEEKwCAMBIX8/8899BLKqruSqocdKJUmJmMVWzM7ifSOUSJRR62R879jpR/qi2IB4j2fmQezVlRPWaOSxzrkb+pencYOL8hhZY9XzsEtDr056F6odFB9WRc2Vnn+dt1Bs9rsf//bgXmMMcaYKh7oCQEz
+  </data>
+ </layer>
+ <objectgroup name="objects" width="33" height="29">
+  <object name="door" x="52" y="123">
+   <properties>
+    <property name="to" value="travel"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

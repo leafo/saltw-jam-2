@@ -95,7 +95,7 @@ class ClosedDoorScene extends Scene
 
           dialog [[
             "There's something wrong with that kid... Both of them... Always hanging out
-            that Cemetary down the road..."
+            that Cemetery down the road..."
           ]]
 
           dialog [[
@@ -104,7 +104,7 @@ class ClosedDoorScene extends Scene
             City..."
           ]]
 
-          get_place "cemetary"
+          get_place "cemetery"
 
 class LobbyRoom extends Room
   map_name: "lobby"

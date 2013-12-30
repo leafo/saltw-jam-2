@@ -18,7 +18,7 @@ class Game
     @unlocked_places = sealed {
       office: true
       lobby: false
-      cemetary: false
+      cemetery: false
     }
 
     @obtained_cards = sealed {
@@ -50,7 +50,7 @@ class Game
 
   @init: =>
     game = Game!
-    game\get_room "office"
+    game\get_room "apartment"
 
 load_font = (img, chars)->
   font_image = imgfy img
