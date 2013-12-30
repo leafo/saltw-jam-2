@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="33" height="29" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16">
+  <image source="../images/tiles.png" width="256" height="256"/>
+ </tileset>
+ <imagelayer name="Image Layer 1" width="33" height="29">
+  <image source="../images/START_BONE_OFFICE.png"/>
+ </imagelayer>
+ <layer name="collide" width="33" height="29">
+  <properties>
+   <property name="hidden" value="true"/>
+   <property name="solid" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt0UEKACAIRFGh+9+5bckEQpNt/oMWCeZUEUDdSEvVhm61zI3Yz1c1tXfMX3PkDOrergy3b3qbw/GnP/O7MlRWpe+lU4ZO1bcBAADoMgHhogCj
+  </data>
+ </layer>
+ <objectgroup name="objects" width="33" height="29">
+  <object name="door" x="192" y="179">
+   <properties>
+    <property name="to" value="travel"/>
+   </properties>
+  </object>
+  <object name="spawn" x="254" y="135"/>
+  <object name="scene" x="98" y="82" width="42" height="30">
+   <properties>
+    <property name="name" value="bones"/>
+   </properties>
+  </object>
+  <object name="scene" x="186" y="78" width="41" height="37">
+   <properties>
+    <property name="name" value="computer"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
