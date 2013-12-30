@@ -91,8 +91,6 @@ Card.cards = lazy_tbl {
       image: "images/card_faecs/CARD_SPOOK.png"
     }
 
-
-
 }
 
 { :Card }

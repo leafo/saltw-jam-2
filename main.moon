@@ -5,9 +5,35 @@ require "lovekit.all"
 
 import Room from require "room"
 
+sealed = (tbl) ->
+  setmetatable tbl, {
+    __newindex: => error "tried to add to sealed table"
+  }
+
 class Game
+  new: =>
+    @unlocked_places = sealed {
+      office: true
+      lobby: false
+    }
+
+    @obtained_cards = sealed {
+      bones: false
+      knife: false
+      murder: false
+      slug: false
+      spook: false
+    }
+
   get_room: (name) =>
     require("rooms.#{name}") @
+
+  get_unlocked_places: =>
+    [k for k,v in pairs(@unlocked_places) when v]
+
+  get_obtained_cards: =>
+    import Card from require "cards"
+    [Card.cards[k] for k,v in pairs(@obtained_cards) when v]
 
   @init: =>
     game = Game!

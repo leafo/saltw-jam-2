@@ -36,9 +36,6 @@ class PlaceList extends HList
 
     super (v.w - b.w) / 2, (v.h - b.h) / 2, merge {
       padding: 40
-
-      Place "BONE OFFICE", "office"
-      Place "APARTMENT LOBBY", "lobby"
     }, opts
 
     @seq = Sequence ->
@@ -75,6 +72,11 @@ class PlaceList extends HList
     g.pop!
 
 class TravelScreen
+  places: lazy_tbl {
+    office: => Place "BONE OFFICE", "office"
+    lobby: => Place "APARTMENT LOBBY", "lobby"
+  }
+
   new: (@game) =>
     @viewport = Viewport scale: GAME_CONFIG.scale
     @entities = DrawList!
@@ -84,6 +86,8 @@ class TravelScreen
         room = @game\get_room place.to
         room\place_player "travel"
         dispatch\replace room
+
+      unpack [@places[p] for p in *@game\get_unlocked_places!]
     }
 
     @entities\add place_list
