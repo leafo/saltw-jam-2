@@ -87,6 +87,10 @@ class Room
     @create_map!
     @player = Player @sx, @sy
 
+    if @sx == 0
+      -- put them at a door if no start position
+      @place_player next @doors
+
     @entities\add @player
 
     @hud = Hud @
@@ -111,6 +115,7 @@ class Room
             @sx = o.x
             @sy = o.y
     }
+
 
   draw: =>
     COLOR\push 0,0,0

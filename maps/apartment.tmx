@@ -26,5 +26,15 @@
     <property name="to" value="lobby"/>
    </properties>
   </object>
+  <object name="scene" x="207" y="82" width="69" height="30">
+   <properties>
+    <property name="name" value="bookcase"/>
+   </properties>
+  </object>
+  <object name="scene" x="89" y="135" width="41" height="24">
+   <properties>
+    <property name="name" value="computer"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

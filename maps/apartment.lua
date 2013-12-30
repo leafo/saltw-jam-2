@@ -109,6 +109,32 @@ return {
           properties = {
             ["to"] = "lobby"
           }
+        },
+        {
+          name = "scene",
+          type = "",
+          shape = "rectangle",
+          x = 207,
+          y = 82,
+          width = 69,
+          height = 30,
+          visible = true,
+          properties = {
+            ["name"] = "bookcase"
+          }
+        },
+        {
+          name = "scene",
+          type = "",
+          shape = "rectangle",
+          x = 89,
+          y = 135,
+          width = 41,
+          height = 24,
+          visible = true,
+          properties = {
+            ["name"] = "computer"
+          }
         }
       }
     }
