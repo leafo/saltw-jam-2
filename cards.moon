@@ -25,7 +25,11 @@ class Card extends Box
     super 0, 0
     @sprite = imgfy @image
     label = if type(@label) == "table"
-      VList { xalign: "center", padding: 0, unpack [Label l for l in *@label] }
+      VList {
+        xalign: "center"
+        padding: 0
+        unpack [Label l for l in *@label]
+      }
     else
       Label @label
 
