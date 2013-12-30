@@ -9,7 +9,7 @@ import TravelScreen from require "travel"
 
 has_message_box = (cls, msg) ->
   cls.__base.on_nearby = (world) =>
-    @msg_box = MessageBox msg
+    @msg_box = MessageBox msg or @interact_message
     world.hud\add_message_box @msg_box
 
   cls.__base.off_nearby = (world) =>
@@ -40,10 +40,11 @@ class Door extends Box
 
 class SceneTrigger extends Entity
   solid: false
-  has_message_box @, "Press 'X' to schmooze"
+  has_message_box @
 
   new: (x,y, w, h, @scene_cls) =>
     super x,y,w,h
+    @interact_message = "Press 'X' to #{@scene_cls.verb}"
 
   on_interact: (world) =>
     {:scene_cls} = @

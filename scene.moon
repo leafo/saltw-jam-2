@@ -206,7 +206,11 @@ class Dialog extends Sequence
     super fn, scope, parent
 
 class Scene
-  bg_image: "images/SCENE_BED.png"
+  bg_image: ""
+  verb: "examine"
+  sequence: =>
+    wait_for_key GAME_CONFIG.key.cancel, GAME_CONFIG.key.confirm
+    dispatch\pop!
 
   new: =>
     @viewport = Viewport scale: GAME_CONFIG.scale

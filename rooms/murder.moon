@@ -15,11 +15,17 @@ class BedScene extends Scene
     dispatch\pop!
 
 
+class PictureScene extends Scene
+  bg_image: "images/SCENE_TORNPIC.png"
+
+class KnifeScene extends Scene
+  bg_image: "images/SCENE_KNIFE.png"
+
 class MurderRoom extends Room
   map_name: "murder"
 
   scenes: {
     bed: BedScene
-    picture: true
-    knife: true
+    picture: PictureScene
+    knife: KnifeScene
   }
