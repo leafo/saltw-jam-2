@@ -24,12 +24,12 @@ class GetPlace extends Box
   waiting: true
   bg_color: {0,0,0, 128}
 
-  new: (place_name, fn) =>
+  new: (place, fn) =>
     @entities = DrawList!
     @content = VList {
       xalign: "center"
       Label "You unlocked a new place"
-      Label '"'.. place_name .. '"'
+      Label '"'.. place.name .. '"'
       Label "" -- spacer
       Label "" -- spacer 2
     }
@@ -232,10 +232,19 @@ class Dialog extends Sequence
 
   @extend {
     get_card: (parent, card) ->
+      {:game} = parent
+      return if game.obtained_cards[card]
+      game.obtained_cards.bones = true
       scope.await (fn) ->
         parent.entities\add GetCard card, fn
 
-    get_place: (parent, place) ->
+    get_place: (parent, place_name) ->
+      {:game} = parent
+      return if game.unlocked_places[place_name]
+
+      place = game\get_place place_name
+      game.unlocked_places[place_name] = true
+
       scope.await (fn) ->
         parent.entities\add GetPlace place, fn
 

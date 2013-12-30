@@ -16,13 +16,10 @@ class BoneScene extends Scene
     dialog "...they have a strange feeling about them. Like an extra shadow, or
       an aura. Pretty creepy."
 
-    unless @game.obtained_cards.bones
-      @game.obtained_cards.bones = true
-      get_card "bones"
+    get_card "bones"
 
 class ComputerScene extends Scene
   bg_image: "images/SCENE_OFFICECOMP.png"
-
 
   sequence: =>
     dialog "There's an e-mail on screen."
@@ -39,8 +36,7 @@ class ComputerScene extends Scene
       - Slugboy"
     ]]
 
-    get_place @game\get_place("lobby").name
-    @game.unlocked_places.lobby = true
+    get_place "lobby"
 
 class OfficeRoom extends Room
   map_name: "office"
