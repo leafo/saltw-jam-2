@@ -5,6 +5,9 @@ import CenterAnchor, Bin, HList, RevealLabel, VList, Label from require "lovekit
 
 box_bx_color = {0,0,0, 80}
 
+fix_str = (str) ->
+  str\gsub("\n", " ")\gsub "%s+", " "
+
 draw_tick = (x,y, w=6) ->
   ow = w + 2
   ow2 = ow/2
@@ -21,11 +24,11 @@ class GetCard extends Box
   waiting: true
   bg_color: {0,0,0, 128}
 
-  new: (fn) =>
+  new: (card_name, fn) =>
     @entities = DrawList!
     import Card from require "cards"
 
-    card = Card.cards.murder
+    card = Card.cards[card_name]
 
     @content = VList {
       xalign: "center"
@@ -128,6 +131,7 @@ class DialogBox extends Box
   y: 0
 
   new: (msg, finished_fn) =>
+    msg = fix_str msg
     @seq = Sequence ->
       await (fn) ->
         @label = RevealLabel msg, 0, 0, {
@@ -184,7 +188,7 @@ class Dialog extends Sequence
   @extend {
     get_card: (parent, card) ->
       scope.await (fn) ->
-        parent.entities\add GetCard fn
+        parent.entities\add GetCard card, fn
 
     dialog: (parent, msg) ->
       scope.await (fn) ->
@@ -212,7 +216,7 @@ class Scene
     wait_for_key GAME_CONFIG.key.cancel, GAME_CONFIG.key.confirm
     dispatch\pop!
 
-  new: =>
+  new: (@game) =>
     @viewport = Viewport scale: GAME_CONFIG.scale
     @entities = EntityList!
 

@@ -52,7 +52,7 @@ class SceneTrigger extends Entity
 
   on_interact: (room) =>
     {:scene_cls} = @
-    dispatch\push scene_cls room
+    dispatch\push scene_cls room.game
 
   draw: =>
     super {255,100,100}
