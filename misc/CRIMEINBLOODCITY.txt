@@ -1,0 +1,174 @@
+------------------------------------------------
+
+CARD DESCRIPTIONS
+
+------------------------------------------------
+
+BONES - Bones are kind of taboo in Blood City. Selling them can be tricky. 
+These bones are very high quality, and well worth a BUCK. You can't help but feel a strange presence
+around them though. The sooner you get rid, the better.
+
+KNIFE - KNIVES ARE DANGEROUS BUT BLOOD IS COOL, I'M DEEPLY CONFLICTED
+
+MURDER LOVER - A message left written in blood. Courier New, 20 pt. You think this might
+be the name of the murderer.
+
+SPOOKBOY - Seems to be a friend of SLUGBOY's. They were going to meet up
+at the graveyard, but then he died.
+
+SLUGBOY - You knew him only as SLUGBOY, through a bone exchange website. He was stabbed
+in the chest and died from a stab in the chest. 
+
+====================================================
+
+
+PART ONE - FINDING THE BODY
+
+START - OFFICE
+
+[MAP: YOUR OFFICE]
+
+OBJECTS - COMPUTER, BAG OF BONES, DOOR TO 'WORLD MAP'
+
+Short intro plays out, then player assumes control.
+
+BAG OF BONES - It's a bunch of high quality bones you recently acquired.
+You had to go out of town to get these, but you found the perfect spot:
+a nameless grave in the middle of nowhere. Bones aren't exactly appreciated
+here in Bone City, mind you. Still, these bones make you feel uncomfortable,
+they have a strange feeling about them. Like an extra shadow, or an aura.
+Pretty creepy.
+[GET BONES CARD]
+
+COMPUTER - There's an e-mail on screen. 
+"Damn, nice bones. Real nice. A guy could have a good time 
+with those bones. In exchange for the bones, I'll give you
+the bucks. Bring them round to my place in a few days. 
+I'm at 233 BLOOD STREET. It's the block of apartments by the
+SAD HOUSE.
+
+- Slugboy" 
+
+[MAP: APARTMENTS] 
+
+[MAP: SAD HOUSE]
+
+---
+
+[APARTMENTS]
+
+HALLWAY
+
+OBJECTS - OPEN DOOR, CLOSED DOOR, DOOR TO WORLD MAP
+
+--- BEFORE SEEING DEAD BODY ---
+CLOSED DOOR - You knock on the door, and a man appears.
+He stares at you with an almost murderous grin, his skull-like head raised slightly, 
+as if he were staring down inside of you. It makes you feel fucked up.
+
+"Hmm..."
+
+BONEs CARD (if taken earlier) - "Bones? I don't want anything to do with bones, buddy. This is Blood City, bones are useless!! Bones are piss!!" 
+NO CARD - Leave
+
+--- AFTER SEEING DEAD BODY ---
+
+CLOSED DOOR - You knock on the door, and a man appears.
+He stares at you with an almost murderous grin, his skull-like head raised slightly, 
+as if he were staring down deep inside of you. It makes you feel fucked up.
+He notices your hand trembling about the same time you do. You only just realised, but the
+shock of seeing blood has kind of messed you up. He sees this, and his eyes widen. Could he 
+tell?
+
+BONES CARD (if taken earlier) - "Bones? I don't want anything to do with bones, buddy. This is Blood City, bones are useless!! Bones are piss!!" 
+
+KNIFE CARD - "Knives? The only thing I know about knives is they make the blood come out. Why would I know anything about knives? What are you suggesting, buddy?"
+
+SLUGBOY CARD - The bulges of flesh around his face seem to collapse into the middle, as a deep frown forms.
+"I've got nothing to say about those two creeps."
+
+MURDER LOVER CARD - "Hmm... I don't get it. Blood lover, sure, everyone loves blood... But murder seems
+a little too much to me..."
+
+SPOOKBOY CARD - The smirk on the man's face fades into a more concerned look. He seems a little unsettled.
+"There's something wrong with that kid... Both of them... Always hanging out that Cemetary down the road...
+If I didn't know better, I'd say they were really into bones. And that is a pretty dangerous thing to be
+fascinated by in Blood City..." [MAP: CEMETARY] 
+
+---
+
+SLUGBOY'S APARTMENT
+
+OBJECTS - 
+ROOM 1
+COMPUTER, BOOKCASE
+ROOM 2
+BLOODY BED, KNIFE, DEAD BODY, TORN PICTURE
+
+COMPUTER - The screen is filled with DUNGBOOK, a website designed for sharing dung with friends. 
+There's a message from a person named SPOOKBOY, and though it feels wrong to read it, it is important to remember
+there is no such thing as privacy on DUNGBOOK.
+
+"Meet me tonight. Same time, same grave. Prepare to get spooked.
+
+- Spookboy"
+
+Sounds spooky... 
+
+[ADD SPOOKBOY CARD]
+
+BOOKCASE - There are a number of books here on magic and occultism. A few about human anatomy,
+and some Angela Carter short stories.
+
+---
+
+BLOODY BED - The mattress is stained a deep red. The pool of blood looks fresh but has started to sink into
+the fabric. It looks like someone was here bleeding for a while, until they got dragged off.
+
+KNIFE - This is a sharp knife, plunged into the wall with some force. It'd take some strength to pull it
+out. The long blade is coated with a thin layer of blood.  On the wall is a message...
+"MURDER LOVER". The message is written in blood... There is so much blood here... [GET KNIFE CARD] [GET MURDER LOVER CARD]
+
+TORN PICTURE - There's a large, framed picture of your client, Slugboy. The picture is torn in half,
+but it seems like there should be another person here.
+
+DEAD BODY [FIRST TIME] - Your heart sinks as you see the slumped heap of flesh-coloured blood lying on the floor.
+It is without a doubt your client, you recognise his face from the "Post Your Skull" thread on the
+bone exchange website. Looking closer, you can see a lot of blood flowing from a fatal stab wound
+to the chest. Judging from the size of the pool of blood, you figure he's been slumped here for a while,
+but the trail of blood leading from the bed suggests he was moved after being stabbed.
+
+Your immediate reaction is to run away, but you have nowhere to run. You've no doubt left traces
+around the place, and the cops would come to you sooner or later. For a moment you contemplate going
+to the cops, but the last time you did you got thrown in jail. Seems like the Blood Cops have a bone
+to pick with you. 
+
+So your solution is simple: find the murderer, and take them to the cops. For now, Slugboy is going to 
+have to stay collapsed on the floor. [GET SLUGBOY CARD] 
+
+
+DEAD BODY [AFTER FIRST] - Slugboy is still here. Still dead. The blood is no longer pouring from his chest,
+but it is still a pretty shocking sight. Hopefully nobody wanders in and sees this...
+
+----------------------------------------
+
+[SAD HOUSE]
+
+Sad House is a little aside. It's a room with sad people talking about how sad they are in Blood City.
+Will finish this last as it's not too important.
+
+-----------------------------------------
+
+PART TWO - FINDING THE MURDERER
+
+[CEMETARY]
+
+OBJECTS: SPOOKBOY, GRAVE
+
+
+
+
+
+
+
+
