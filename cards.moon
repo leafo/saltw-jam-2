@@ -1,7 +1,10 @@
 
 { graphics: g } = love
 
-import Label from require "lovekit.ui"
+import VList, Label, Anchor from require "lovekit.ui"
+
+fix_str = (str) ->
+  str\gsub("\n", " ")\gsub "%s+", " "
 
 class Card extends Box
   w: 60
@@ -17,19 +20,24 @@ class Card extends Box
     for k,v in pairs opts
       @[k] = v
 
+    @description = fix_str @description
+
     super 0, 0
     @sprite = imgfy @image
-    @label = Label @label
+    label = if type(@label) == "table"
+      VList { xalign: "center", padding: 0, unpack [Label l for l in *@label] }
+    else
+      Label @label
+
+    @label = Anchor 0,0, label, "center", "bottom"
     @rot = 0
 
   flip: (immediate=false) =>
 
   update: (dt) =>
-    -- @rot += dt
-
-    -- if @rot > 2
-    --   @rot = 0
-
+    @label.x = @x + @w / 2
+    @label.y = @y + @h - 2
+    @label\update dt
     true
 
   draw: =>
@@ -49,8 +57,6 @@ class Card extends Box
       @back_sprite\draw @x + hw, @y, 0, sx, 1, hw
 
     if rot < 0.5
-      @label.x = @x + (@w - @label.w) / 2
-      @label.y = @y + @h - @label.h - 2
       COLOR\pusha (1 - rot * 2) * 255
       @label\draw!
       COLOR\pop!
@@ -59,35 +65,43 @@ Card.cards = lazy_tbl {
   bones: ->
     Card {
       label: "BONES"
-      description: "Bones are cool"
+      description: "Bones are kind of taboo in Blood City. Selling them can be
+      tricky. These bones are very high quality, and well worth a BUCK. You
+      can't help but feel a strange presence around them though. The sooner you
+      get rid, the better."
+
       image: "images/card_faecs/CARD_BONES.png"
     }
 
   knife: ->
     Card {
       label: "KNIFE"
-      description: "The knife"
+      description: "KNIVES ARE DANGEROUS BUT BLOOD IS COOL, I'M DEEPLY
+      CONFLICTED"
       image: "images/card_faecs/CARD_KNIFE.png"
     }
 
   murder: ->
     Card {
-      label: "MURDER"
-      description: "The murder"
+      label: {"MURDER", "LOVER"}
+      description: "A message left written in blood. Courier New, 20 pt. You
+      think this might be the name of the murderer."
       image: "images/card_faecs/CARD_MURDER.png"
     }
 
   slug: ->
     Card {
       label: "SLUG"
-      description: "The slug"
+      description: "You knew him only as SLUGBOY, through a bone exchange
+      website. He was stabbed in the chest and died from a stab in the chest."
       image: "images/card_faecs/CARD_SLUG.png"
     }
 
   spook: ->
     Card {
       label: "MURDER"
-      description: "The spook"
+      description: "Seems to be a friend of SLUGBOY's. They were going to meet
+      up at the graveyard, but then he died."
       image: "images/card_faecs/CARD_SPOOK.png"
     }
 
