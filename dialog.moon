@@ -1,7 +1,7 @@
 
 {graphics: g, :timer, :keyboard} = love
 
-import CenterAnchor, HList, RevealLabel, VList, Label from require "lovekit.ui"
+import CenterAnchor, Bin, HList, RevealLabel, VList, Label from require "lovekit.ui"
 
 box_bx_color = {0,0,0, 80}
 
@@ -123,6 +123,9 @@ class DialogBox extends Box
   show_next: false
   alpha: 0
 
+  x: 0
+  y: 0
+
   new: (msg, finished_fn) =>
     @seq = Sequence ->
       await (fn) ->
@@ -149,9 +152,6 @@ class DialogBox extends Box
 
     running = @seq\update dt
     @label\update dt * mult
-
-    @x = world.viewport\left 10
-    @y = world.viewport\bottom(10) - @label.h
 
     @w = world.viewport.w - 20
     @label\set_max_width(@w)
@@ -187,11 +187,7 @@ class Dialog extends Sequence
 
     dialog: (parent, msg) ->
       scope.await (fn) ->
-        if parent.current_dialog
-          parent.current_dialog.waiting = false
-
-        parent.current_dialog = DialogBox msg, fn
-        parent.entities\add parent.current_dialog
+        parent\add_dialog DialogBox msg, fn
 
     choice: (parent, choices) ->
       scope.await (fn) ->
@@ -211,13 +207,21 @@ class TalkScreen
     @bg = imgfy @image
 
     @seqs\add Dialog ->
-      dialog @, "Pick one of these choices and I'll fart yr face there Pal"
+      dialog @, "The mattress is stained a deep red. The pool of blood looks fresh but has started to sink into the fabric."
 
-      if "Yes" == choice @, { "Yes", "No" }
+      dialog @, "It looks like someone was here bleeding for a while, until they got dragged off."
+
+      if "Investigate" == choice @, { "Investigate", "Walk away" }
         get_card @, "coolcard"
 
-      dialog @, "Sod off mate"
       dispatch\pop!
+
+  add_dialog: (dialog) =>
+    if @current_dialog
+      @current_dialog.waiting = false
+
+    @current_dialog = dialog
+    @entities\add Bin 0, @viewport\bottom(76), @viewport.w, 76, dialog
 
   update: (dt) =>
     @seqs\update dt
@@ -226,9 +230,7 @@ class TalkScreen
   draw: =>
     @viewport\apply!
     @bg\draw 0, 0
-
     @entities\draw!
-
     @viewport\pop!
 
 {:TalkScreen}
