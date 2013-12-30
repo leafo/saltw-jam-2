@@ -48,9 +48,12 @@ class Card extends Box
       sx = (rot - 0.5) * 2
       @back_sprite\draw @x + hw, @y, 0, sx, 1, hw
 
-    @label.x = @x + (@w - @label.w) / 2
-    @label.y = @y + 2
-    @label\draw!
+    if rot < 0.5
+      @label.x = @x + (@w - @label.w) / 2
+      @label.y = @y + @h - @label.h - 2
+      COLOR\pusha (1 - rot * 2) * 255
+      @label\draw!
+      COLOR\pop!
 
 Card.cards = lazy_tbl {
   bones: ->

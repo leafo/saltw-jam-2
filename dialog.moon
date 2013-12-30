@@ -1,7 +1,7 @@
 
 {graphics: g, :timer, :keyboard} = love
 
-import RevealLabel, VList, Label from require "lovekit.ui"
+import CenterAnchor, HList, RevealLabel, VList, Label from require "lovekit.ui"
 
 box_bx_color = {0,0,0, 80}
 
@@ -14,6 +14,63 @@ draw_tick = (x,y, w=6) ->
   COLOR\push 255, 100, 100
   g.rectangle "fill", x - w2, y - w2, w, w
   COLOR\pop!
+
+
+class GetCard extends Box
+  alpha: 0
+  waiting: true
+
+  new: (fn) =>
+    @entities = DrawList!
+    import Card from require "cards"
+
+    card = Card.cards.bones
+
+    @content = VList {
+      xalign: "center"
+
+      draw: =>
+        g.push!
+        g.translate 0, -30
+        @__class.draw @
+        g.pop!
+
+      Label "You got a card"
+      card
+      Label " " -- spacer
+    }
+
+    @anchor = CenterAnchor 0,0, @content
+
+    @entities\add @anchor
+
+    @seq = Sequence ->
+      card.rot = 1
+      tween @, 0.4, alpha: 255
+      tween card, 1, rot: 0
+
+      @content.items[3] = RevealLabel "Press 'X' to continue",
+        0,0, fixed_size: true
+
+      wait_for_key GAME_CONFIG.key.confirm
+
+      tween @, 1, alpha: 0
+      wait 0.1
+
+      fn! if fn
+
+  draw: =>
+    COLOR\pusha @alpha
+    super {0,0,0, 128}
+    @entities\draw!
+    COLOR\pop!
+
+  update: (dt, world) =>
+    @x, @y, @w, @h = world.viewport\unpack!
+    @anchor.x, @anchor.y = @center!
+
+    @entities\update dt
+    @seq\update dt
 
 class ChoiceBox extends VList
   waiting: true
@@ -124,7 +181,9 @@ class Dialog extends Sequence
   scope = @default_scope
 
   @extend {
-    get_card: (parent) ->
+    get_card: (parent, card) ->
+      scope.await (fn) ->
+        parent.entities\add GetCard fn
 
     dialog: (parent, msg) ->
       scope.await (fn) ->
@@ -153,16 +212,11 @@ class TalkScreen
 
     @seqs\add Dialog ->
       dialog @, "Pick one of these choices and I'll fart yr face there Pal"
-      res = choice @, {
-        "Yes"
-        "No"
-      }
 
-      if res == "Yes"
-        dialog @, "You picked yes"
-      else
-        dialog @, "Sod off mate"
+      if "Yes" == choice @, { "Yes", "No" }
+        get_card @, "coolcard"
 
+      dialog @, "Sod off mate"
       dispatch\pop!
 
   update: (dt) =>
