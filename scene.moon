@@ -197,7 +197,7 @@ class Dialog extends Sequence
             .bottom_offset = ChoiceBox.bottom_offset * 2 + d.h
   }
 
-class TalkScreen
+class Scene
   image: "images/SCENE_BED.png"
 
   new: =>
@@ -234,4 +234,4 @@ class TalkScreen
     @entities\draw!
     @viewport\pop!
 
-{:TalkScreen}
+{:Scene}

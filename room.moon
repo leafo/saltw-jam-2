@@ -2,7 +2,7 @@
 {graphics: g} = love
 
 import MessageBox from require "ui"
-import TalkScreen from require "dialog"
+import Scene from require "scene"
 import Hud from require "ui"
 import InventoryScreen from require "inventory"
 import TravelScreen from require "travel"
@@ -43,7 +43,7 @@ class Npc extends Entity
   has_message_box @, "Press 'X' to schmooze"
 
   on_interact: (world) =>
-    dispatch\push TalkScreen!
+    dispatch\push Scene!
 
   draw: =>
     super {255,100,100}
