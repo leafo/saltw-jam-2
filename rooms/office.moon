@@ -10,7 +10,7 @@ class BoneScene extends Scene
     dialog "You had to go out of town to get these, but you found the perfect
     spot: a nameless grave in the middle of nowhere."
 
-    dialog "Bones aren't exactly appreciated here in Bone City, mind you.
+    dialog "Bones aren't exactly appreciated here in Blood City, mind you.
       Still, these bones make you feel uncomfortable..."
 
     dialog "...they have a strange feeling about them. Like an extra shadow, or
