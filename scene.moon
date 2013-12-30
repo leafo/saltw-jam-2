@@ -197,25 +197,26 @@ class Dialog extends Sequence
             .bottom_offset = ChoiceBox.bottom_offset * 2 + d.h
   }
 
+  -- bind all methods
+  new: (fn, parent) =>
+    scope = setmetatable {}, __index: @@default_scope
+    for k,v in pairs @@default_scope
+      scope[k] = (...) ->v parent, ...
+
+    super fn, scope, parent
+
 class Scene
-  image: "images/SCENE_BED.png"
+  bg_image: "images/SCENE_BED.png"
 
   new: =>
     @viewport = Viewport scale: GAME_CONFIG.scale
     @entities = EntityList!
 
     @seqs = DrawList!
-    @bg = imgfy @image
+    @bg = imgfy @bg_image
 
-    @seqs\add Dialog ->
-      dialog @, "The mattress is stained a deep red. The pool of blood looks fresh but has started to sink into the fabric."
-
-      dialog @, "It looks like someone was here bleeding for a while, until they got dragged off."
-
-      if "Investigate" == choice @, { "Investigate", "Walk away" }
-        get_card @, "coolcard"
-
-      dispatch\pop!
+    if @sequence
+      @seqs\add Dialog @sequence, @
 
   add_dialog: (dialog) =>
     if @current_dialog

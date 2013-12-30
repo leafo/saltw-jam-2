@@ -28,7 +28,7 @@ class Door extends Box
     @move_center x, y
 
   on_interact: (world) =>
-    room = world.game.rooms[@to]
+    room = world.game\get_room @to
     room\place_player world.name
 
     dispatch\replace room
@@ -38,12 +38,16 @@ class Door extends Box
 
   update: => true
 
-class Npc extends Entity
+class SceneTrigger extends Entity
   solid: false
   has_message_box @, "Press 'X' to schmooze"
 
+  new: (x,y, w, h, @scene_cls) =>
+    super x,y,w,h
+
   on_interact: (world) =>
-    dispatch\push Scene!
+    {:scene_cls} = @
+    dispatch\push scene_cls world
 
   draw: =>
     super {255,100,100}
@@ -65,31 +69,41 @@ class Player extends Entity
     @scale 1.5, 1.5, true
 
 class Room
-  new: (@game, @name) =>
+  sx: 0, sy: 0
+
+  scenes: {}
+  map_name: ""
+
+  new: (@game) =>
     @viewport = Viewport scale: GAME_CONFIG.scale
     @entities = DrawList!
     @doors = {}
 
-    @map = TileMap.from_tiled "maps.#{@name}", {
+    @create_map!
+    @player = Player @sx, @sy
+
+    @entities\add @player
+
+    @hud = Hud @
+    @nearby = {}
+    @collide = UniformGrid!
+
+  create_map: =>
+    @map = TileMap.from_tiled "maps.#{@map_name}", {
       object: (o) ->
         switch o.name
           when "door"
             door = Door o.x, o.y, o.properties.to
             @doors[door.to] = door
             @entities\add door
-          when "npc"
-            @entities\add Npc o.x, o.y
+          when "scene"
+            name = o.properties.name
+            scene_cls = assert @scenes[name], "Missing scene #{name}"
+            @entities\add SceneTrigger o.x, o.y, o.width, o.height, scene_cls
           when "spawn"
             @sx = o.x
             @sy = o.y
     }
-
-    @player = Player @sx, @sy
-    @entities\add @player
-
-    @hud = Hud @
-    @nearby = {}
-    @collide = UniformGrid!
 
   draw: =>
     COLOR\push 0,0,0

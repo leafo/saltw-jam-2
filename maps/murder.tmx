@@ -17,10 +17,24 @@
  </layer>
  <objectgroup name="objects" width="33" height="29">
   <object name="spawn" x="100" y="155"/>
-  <object name="npc" x="216" y="119"/>
+  <object name="scene" x="239" y="93" width="66" height="48">
+   <properties>
+    <property name="name" value="bed"/>
+   </properties>
+  </object>
   <object name="door" x="78" y="127">
    <properties>
     <property name="to" value="apartment"/>
+   </properties>
+  </object>
+  <object name="scene" x="137" y="87" width="43" height="24">
+   <properties>
+    <property name="name" value="picture"/>
+   </properties>
+  </object>
+  <object name="scene" x="336" y="137" width="26" height="27">
+   <properties>
+    <property name="name" value="knife"/>
    </properties>
   </object>
  </objectgroup>

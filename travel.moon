@@ -81,7 +81,7 @@ class TravelScreen
 
     place_list = PlaceList @viewport, {
       on_select: (list, place) ->
-        room = @game.rooms[place.to]
+        room = @game\get_room place.to
         room\place_player "travel"
         dispatch\replace room
     }

@@ -96,15 +96,17 @@ return {
           properties = {}
         },
         {
-          name = "npc",
+          name = "scene",
           type = "",
           shape = "rectangle",
-          x = 216,
-          y = 119,
-          width = 0,
-          height = 0,
+          x = 239,
+          y = 93,
+          width = 66,
+          height = 48,
           visible = true,
-          properties = {}
+          properties = {
+            ["name"] = "bed"
+          }
         },
         {
           name = "door",
@@ -117,6 +119,32 @@ return {
           visible = true,
           properties = {
             ["to"] = "apartment"
+          }
+        },
+        {
+          name = "scene",
+          type = "",
+          shape = "rectangle",
+          x = 137,
+          y = 87,
+          width = 43,
+          height = 24,
+          visible = true,
+          properties = {
+            ["name"] = "picture"
+          }
+        },
+        {
+          name = "scene",
+          type = "",
+          shape = "rectangle",
+          x = 336,
+          y = 137,
+          width = 26,
+          height = 27,
+          visible = true,
+          properties = {
+            ["name"] = "knife"
           }
         }
       }

@@ -6,14 +6,12 @@ require "lovekit.all"
 import Room from require "room"
 
 class Game
+  get_room: (name) =>
+    require("rooms.#{name}") @
+
   @init: =>
     game = Game!
-    game.rooms.murder
-
-  new: =>
-    @rooms = setmetatable {}, __index: (tbl, name) ->
-      with r = Room @, name
-        tbl[name] = r
+    game\get_room "murder"
 
 load_font = (img, chars)->
   font_image = imgfy img
