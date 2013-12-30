@@ -1,9 +1,6 @@
 
 {graphics: g} = love
 
-ez_approach = (val, target, dt) ->
-  approach val, target, dt * 10 * math.max 1, math.abs val - target
-
 import HList, Label, RevealLabel, CenterAnchor from require "lovekit.ui"
 
 class Place extends Box

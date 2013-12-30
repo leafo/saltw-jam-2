@@ -125,6 +125,8 @@ class ChoiceBox extends VList
   waiting: true
   current_choice: 1
   bottom_offset: 10
+  tick_y: nil
+  target_tick_y: nil
 
   new: (choices, finished_fn) =>
     super 0, 0, [Label c for c in *choices]
@@ -138,6 +140,7 @@ class ChoiceBox extends VList
             @move 1
           when GAME_CONFIG.key.confirm
             break
+        @create_time = timer.getTime!
 
       @waiting = false
       finished_fn choices[@current_choice]
@@ -145,16 +148,24 @@ class ChoiceBox extends VList
   move: (dir) =>
     before = @current_choice
     @current_choice = math.max 1, math.min #@items, @current_choice + dir
+    current =  @items[@current_choice]
 
-    if @current_choice == before
+    @target_tick_y = current.y + (current.h / 2)
+    @tick_y = @target_tick_y if @tick_y == nil
+
+    if dir != 0 and @current_choice == before
       print "play Brrrt"
 
   update: (dt, world) =>
     super dt
     @seq\update dt if @seq
 
+    if @target_tick_y
+      @tick_y = ez_approach @tick_y, @target_tick_y, dt * 2
+
     @x = world.viewport\right @w + 10
     @y = world.viewport\bottom @h + @bottom_offset
+
 
     @waiting
 
@@ -162,8 +173,12 @@ class ChoiceBox extends VList
     Box.draw @, box_bx_color
     current =  @items[@current_choice]
 
-    if duty_on nil, nil, @create_time
-      draw_tick current.x - 9, current.y + (current.h / 2)
+    if not @tick_y and current.y != 0  -- hak attack
+      @move 0
+
+    if @tick_y and duty_on nil, nil, @create_time
+      draw_tick current.x - 9, @tick_y
+
     super!
 
 

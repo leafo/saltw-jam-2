@@ -4,9 +4,6 @@
 import Anchor, VList, Label, RevealLabel, Bin from require "lovekit.ui"
 import Card from require "cards"
 
-ez_approach = (val, target, dt) ->
-  approach val, target, dt * 10 * math.max 1, math.abs val - target
-
 class CardList extends VList
   current_choice: 1
   oy: 0
