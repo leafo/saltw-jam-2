@@ -1,0 +1,33 @@
+INTRO 
+---
+
+[IMG - INTRO_1]
+
+Blood City... A dank, dirty city, filled with
+murderists and cultists... This is the last place
+you wanted to end up.
+
+You are Blood City's best and only Bone Merchant.
+Human bones, animal bones, Dark bones, whatever
+you can get your hands on.
+
+[IMG - INTRO_2]
+
+Your recent haul came from a nameless grave outside
+of the city. The skull has a real strange shape,
+you've never seen anything like it.
+
+[IMG - INTRO_3
+
+But when you look at the bones, you can't help but
+feel a strange presence about them... Something dark,
+creepy as shit. You swear you can see some sort of
+figure around them deep in the night. It's been keeping you up at night.
+
+You need to get rid of them as fast as possible.
+Bones are illegal in Blood City, but there are 
+people who'll buy them. You're not supposed to 
+meet your client for a few days, but I think it's
+time to get rid of these bones now, don't you?
+
+[GO TO WORLD MAP - ONLY 'YOUR OFFICE' IS AVAILABLE]
