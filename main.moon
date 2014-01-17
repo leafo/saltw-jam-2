@@ -51,8 +51,10 @@ class Game
     [Card.cards[k] for k,v in pairs(@obtained_cards) when v]
 
   @init: =>
-    game = Game!
-    game\get_room "office"
+    import Intro from require "intro"
+    Intro Game!
+    -- game = Game!
+    -- game\get_room "office"
 
 load_font = (img, chars)->
   font_image = imgfy img
@@ -66,7 +68,8 @@ love.load = ->
   g.setFont fonts.default
   g.setBackgroundColor 30,30,40
 
-  export dispatch = Dispatcher Game\init!
+  export dispatch = Dispatcher!
+  dispatch\push Game\init!
   dispatch.default_transition = FadeTransition
   dispatch\bind love
 

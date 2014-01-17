@@ -300,9 +300,12 @@ class Scene
     if @sequence
       wrapped = (...) ->
         run @sequence, ...
-        dispatch\pop!
+        @end_scene!
 
       @seqs\add Dialog wrapped, @
+
+  end_scene: =>
+    dispatch\pop!
 
   add_dialog: (dialog) =>
     if @current_dialog
