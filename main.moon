@@ -52,9 +52,9 @@ class Game
 
   @init: =>
     import Intro from require "intro"
-    Intro Game!
-    -- game = Game!
-    -- game\get_room "office"
+    -- Intro Game!
+    game = Game!
+    game\get_room "murder"
 
 load_font = (img, chars)->
   font_image = imgfy img

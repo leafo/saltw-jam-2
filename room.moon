@@ -102,7 +102,7 @@ class Room
     @on_enter!
 
   create_map: =>
-    @map = TileMap.from_tiled "maps.#{@map_name}", {
+    @map = TileMap\from_tiled "maps.#{@map_name}", {
       object: (o) ->
         switch o.name
           when "door"
